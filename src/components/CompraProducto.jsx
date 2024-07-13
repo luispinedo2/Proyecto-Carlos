@@ -1,8 +1,14 @@
 import React, { useEffect, useState } from "react";
+import { useAuth0 } from '@auth0/auth0-react';
 import { v4 as uuidv4 } from 'uuid';
 import { CarritoItem } from "./CarritoItem";
+import { Login } from "./Login";
+import { Logout } from "./Logout";
+import { Profile } from "./Profile";
+
 
 export function CompraProducto() {
+    const { isLoading, isAuthenticated, loginWithRedirect } = useAuth0();
     const [productos, setProductos] = useState([]);
     const [carrito, setCarrito] = useState(JSON.parse(localStorage.getItem('carrito')) || []);
     const [total, setTotal] = useState(JSON.parse(localStorage.getItem('total')) || 0);
@@ -44,78 +50,31 @@ export function CompraProducto() {
         setTotal(nuevoTotal);
     };
 
-    const agregarProducto = (producto, cantidad) => {
-        if (cantidad <= 0) {
-            setMensaje("La cantidad debe ser mayor a 0");
-        } else if (producto.stock < cantidad) {
-            setMensaje("No hay suficiente stock del producto");
+    const agregarProducto = (producto) => {
+        const productoEnCarrito = carrito.find(item => item.id === producto.id);
+        if (productoEnCarrito) {
+            const nuevoCarrito = carrito.map(item =>
+                item.id === producto.id ? { ...item, cantidad: item.cantidad + 1 } : item
+            );
+            setCarrito(nuevoCarrito);
+            setTotal(total + producto.precio);
         } else {
-
-            //agregar la imagen del producto al carrito
-
-            const productoEnCarrito = carrito.find(item => item.id === producto.id);
-            if (productoEnCarrito) {
-                const nuevoCarrito = carrito.map(item =>
-                    item.id === producto.id ? { ...item, cantidad: item.cantidad + cantidad } : item
-                );
-                setCarrito(nuevoCarrito);
-            } else {
-                const nuevoCarrito = [...carrito, { ...producto, cantidad }];
-                setCarrito(nuevoCarrito);
-            }
-            setTotal(total + producto.precio * cantidad);
+            setCarrito([...carrito, { ...producto, cantidad: 1 }]);
+            setTotal(total + producto.precio);
         }
-
-        setTimeout(() => {
-            setMensaje("");
-        }, 5000);
     };
 
     const comprar = () => {
-        if (carrito.length === 0) {
-            setMensaje("El carrito está vacío");
-            return;
-        }
-
-        const confirmacion = window.confirm("¿Está seguro de que desea confirmar la compra?");
-        if (!confirmacion) {
-            return;
-        }
-
-        const nuevosProductos = productos.map(producto => {
-            const productoEnCarrito = carrito.find(item => item.id === producto.id);
-            if (productoEnCarrito) {
-                return {
-                    ...producto,
-                    stock: producto.stock - productoEnCarrito.cantidad
-                };
-            }
-            return producto;
-        });
-
-        setProductos(nuevosProductos);
-        localStorage.setItem('productos', JSON.stringify(nuevosProductos));
-
-        guardarCompraEnLocalStorage();
-        setMensaje("Compra realizada con éxito. Su compra es de " + total.toLocaleString() + ". Gracias por su compra.");
-        setCarrito([]);
-        setTotal(0);
-
-        setTimeout(() => {
-            setMensaje("");
-        }, 5000);
-    };
-
-    const guardarCompraEnLocalStorage = () => {
         const nuevaCompra = {
             id: uuidv4(),
-            fecha: new Date().toLocaleString(),
-            total: total,
-            productos: carrito
+            fecha,
+            productos: carrito,
+            total
         };
-        const nuevasCompras = [...compras, nuevaCompra];
-        setCompras(nuevasCompras);
-        localStorage.setItem('compras', JSON.stringify(nuevasCompras));
+        setCompras([...compras, nuevaCompra]);
+        setMensaje("Compra realizada con éxito");
+        setCarrito([]);
+        setTotal(0);
     };
 
 
@@ -140,12 +99,28 @@ export function CompraProducto() {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     };
 
-    return (
-        <div className="content-productos">
-            <div>
-                <header className="card-title titulo">Generar compra</header>
-            </div>
+    // Autenticación
+    if (isLoading) {
+        return <div>Loading...</div>;
+    }
 
+    if (!isAuthenticated) {
+        return (
+            <div>
+                <h2>Para realizar una compra, debes iniciar sesión.</h2>
+                <Login />
+            </div>
+        );
+    }
+
+
+    return (
+        <div>
+            <header>
+                <h1>Compra Producto</h1>
+                <Profile />
+                <Logout />
+            </header>
             <div className="row">
                 <div className="col-8 productos">
                     <h1 className="subtitulo">Productos Disponibles</h1>
@@ -176,7 +151,6 @@ export function CompraProducto() {
                     </div>
                 </div>
             </div>
-
             <div className={`scroll-up-btn ${showScroll ? 'show' : ''}`} onClick={scrollUp}>
                 <i className="bi bi-arrow-up-short"></i>
             </div>

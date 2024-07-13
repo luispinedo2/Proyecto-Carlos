@@ -1,6 +1,4 @@
-import { Home } from "./Home"
-import { CompraProducto } from "./CompraProducto"
-
+import { Home } from "../Home/Home"
 
 export function PaginaPrincipal() {
     return <>

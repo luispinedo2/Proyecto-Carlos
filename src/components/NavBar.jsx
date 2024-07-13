@@ -18,7 +18,7 @@ function NavBar() {
 
 
                         <li className="nav-item">
-                            <Link to="/Home" className={isActive('/Home')}>Inicio</Link>
+                            <Link to="/" className={isActive('/Home')}>Inicio</Link>
                         </li>
                         <li className="nav-item">
                             <Link to="/about" className={isActive('/about')}>Sobre nosotros</Link>
