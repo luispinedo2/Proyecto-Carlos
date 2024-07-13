@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useAuth0 } from '@auth0/auth0-react';
 import { v4 as uuidv4 } from 'uuid';
-import { CarritoItem } from "./CarritoItem";
-import { Login } from "./Login";
-import { Logout } from "./Logout";
-import { Profile } from "./Profile";
-
+import { CarritoItem } from "./CarritoItem"; // Ajusta esta importación según sea necesario
+import { Login } from './Login'; // Ajusta esta importación según sea necesario
+import { Logout } from './Logout'; // Ajusta esta importación según sea necesario
+import { Profile } from './Profile'; // Ajusta esta importación según sea necesario
 
 export function CompraProducto() {
     const { isLoading, isAuthenticated, loginWithRedirect } = useAuth0();
@@ -77,7 +76,6 @@ export function CompraProducto() {
         setTotal(0);
     };
 
-
     const [showScroll, setShowScroll] = useState(false);
 
     useEffect(() => {
@@ -99,6 +97,7 @@ export function CompraProducto() {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     };
 
+
     // Autenticación
     if (isLoading) {
         return <div>Loading...</div>;
@@ -112,7 +111,6 @@ export function CompraProducto() {
             </div>
         );
     }
-
 
     return (
         <div>
