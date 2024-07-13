@@ -1,0 +1,933 @@
+:root {
+    --color-background: rgba(44, 44, 44, 0.748);
+    --color-background-subtitle: rgba(35, 34, 34, 0.819);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 62.5%;
+}
+
+body {
+    font-family: 'Times New Roman', Times, serif;
+    background-image: url(../../assets/img/fondo.png);
+    background-size: cover;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-position: center;
+    color: white;
+    overflow: hidden;
+    overflow-y: scroll;
+}
+
+
+/* Estilos a la pagina principal */
+.titulo-header {
+    text-align: center;
+    color: white;
+    font-size: 4rem !important;
+    width: 100%;
+    opacity: 0.9;
+
+}
+
+.container-home {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 5rem;
+    gap: 1rem;
+    font-size: 1.8rem;
+}
+
+.navbar {
+    background-color: var(--color-background);
+    color: white;
+    font-size: 2.1rem;
+    margin-top: 1rem;
+    display: block;
+    text-align: center;
+    width: 92%;
+    margin-left: 8rem;
+    opacity: 0.8;
+}
+
+
+.menu-list {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    list-style: none;
+    margin-left: 4rem;
+    margin: 0 auto;
+}
+
+.nav-item {
+    display: block;
+    margin-right: 1.5rem;
+    padding-right: 0.5rem;
+}
+
+.nav-link {
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.nav-link::after {
+    content: '';
+    display: block;
+    width: 0;
+    height: 2px;
+    background-color: white;
+    transition: all 400ms ease-in-out;
+    -webkit-transition: all 400ms ease-in-out;
+    -moz-transition: all 400ms ease-in-out;
+    -ms-transition: all 400ms ease-in-out;
+    -o-transition: all 400ms ease-in-out;
+}
+
+.nav-link:hover::after {
+    width: 100%;
+}
+
+.nav-link:hover {
+    color: rgb(0, 162, 255) !important;
+    transition: all 500ms ease-in-out;
+    -webkit-transition: all 500ms ease-in-out;
+    -moz-transition: all 500ms ease-in-out;
+    -ms-transition: all 500ms ease-in-out;
+    -o-transition: all 500ms ease-in-out;
+    opacity: 0.8;
+}
+
+.nav-link.active::after {
+    width: 100%;
+
+
+}
+
+.active {
+    color: rgb(0, 162, 255) !important;
+
+}
+
+.content-card {
+    margin-bottom: 2rem !important;
+}
+
+.card {
+    height: 100%;
+    gap: 1rem;
+    background-color: rgba(35, 34, 34, 0.819);
+}
+
+.card-img-top {
+    height: 200px;
+    width: 100%;
+}
+
+.imagen {
+    width: 100%;
+    border-radius: 1rem;
+}
+
+.carrito-item-imagen {
+    height: 50px;
+    width: 13%;
+}
+
+
+.card-title {
+    font-size: 2rem;
+    color: white;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+
+
+.card-text {
+    font-size: 1.6rem;
+    color: rgba(255, 255, 255, 0.436);
+    text-align: center;
+}
+
+.card-text__cantidad {
+    font-size: 1.6rem;
+    color: rgba(255, 255, 255, 0.436);
+    text-align: center;
+    margin-bottom: -1rem !important;
+    margin-top: -2rem;
+
+}
+
+.card-description {
+    font-size: 1.6rem;
+    color: rgba(255, 255, 255, 0.436);
+    text-align: center;
+    margin-bottom: 1rem !important;
+}
+
+
+.card:hover {
+    transform: scale(1.03);
+    transition: transform 0.5s;
+    -webkit-transform: scale(1.03);
+    -moz-transform: scale(1.03);
+    -ms-transform: scale(1.03);
+    -o-transform: scale(1.03);
+    cursor: pointer;
+}
+
+.text-compra {
+    font-size: 2.5rem;
+    color: white;
+    text-align: center;
+    margin-top: 1rem;
+    opacity: 0.8;
+}
+
+.bi {
+    display: block;
+    color: white;
+    font-size: 3rem;
+    margin-left: 1rem;
+}
+
+.link-compra {
+    color: rgba(255, 255, 255, 0.686);
+    text-decoration: none;
+    font-size: 2.2rem;
+    text-align: center;
+    margin-top: 1rem;
+    display: block;
+    margin-bottom: 1rem;
+}
+
+.link-compra:hover {
+    color: white;
+    text-decoration: underline;
+}
+
+.article,
+.noticias {
+    display: flex;
+    background-color: var(--color-background);
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    gap: 1rem;
+    text-align: justify;
+    width: 90%;
+}
+
+.titulo-article,
+.titulo-noticias,
+.titulo-productos {
+    text-align: center;
+    color: white;
+    font-size: 4rem !important;
+    margin-top: 1rem;
+    width: 100%;
+    margin-bottom: 3rem;
+    opacity: 0.8;
+}
+
+.subtitulo-noticias {
+    text-align: center;
+    color: white;
+    font-size: 2.5rem !important;
+    width: 100%;
+    margin-bottom: 3rem;
+    margin-left: 1rem;
+    text-decoration: underline;
+    opacity: 0.8;
+}
+
+.text-article,
+.text-noticias {
+    font-size: 2.2rem;
+    color: rgba(255, 255, 255, 0.767);
+    text-align: justify;
+    margin: 0 3rem 3rem 3rem;
+}
+
+.content-footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1rem;
+
+}
+
+.footer {
+    background-color: rgba(35, 34, 34, 0.819);
+    color: white;
+    text-align: center;
+    padding: 1rem;
+    width: 90%;
+    font-size: 2rem;
+}
+
+/*fin de estilos a la pagina principal */
+/* Estilos a la pagina de carritos */
+.titulo,
+.subtitulo,
+.titulo-agregar {
+    text-align: center;
+    color: white;
+    font-size: 4rem !important;
+    margin-top: 1rem;
+    width: 90%;
+    margin-bottom: 3rem;
+    margin: 0 auto;
+    opacity: 0.8;
+}
+
+.titulo-agregar {
+    margin-left: 28rem;
+    margin-bottom: 2rem;
+}
+
+.contentCarrito {
+    color: white;
+
+
+}
+
+.btn-danger {
+    width: 40%;
+    margin-top: 0.9rem;
+    margin-bottom: 1rem;
+    opacity: 0.8;
+    font-size: 1.8rem;
+    transition: all 300ms ease-in-out;
+}
+
+.btn-danger:hover {
+    background-color: rgb(205, 5, 5);
+    opacity: 1;
+}
+
+.btn-success {
+    width: 100%;
+    margin-top: 0.9rem;
+    margin-bottom: 1rem;
+    font-size: 2rem;
+    opacity: 0.8;
+    transition: all 300ms ease-in-out;
+}
+
+.btn-success:hover {
+    background-color: rgb(15, 127, 8);
+    opacity: 1;
+}
+
+.btn-danger-eliminar {
+    width: 100%;
+    margin-top: 0.9rem;
+    margin-bottom: 1rem;
+    opacity: 0.8;
+    transition: all 300ms ease-in-out;
+    -webkit-transition: all 300ms ease-in-out;
+    -moz-transition: all 300ms ease-in-out;
+    -ms-transition: all 300ms ease-in-out;
+    -o-transition: all 300ms ease-in-out;
+}
+
+.btn-danger-eliminar:hover {
+    background-color: rgb(205, 5, 5);
+    opacity: 1;
+}
+
+.btn-primary {
+    width: 100%;
+    margin-top: 0.9rem;
+    opacity: 0.8;
+    transition: all 300ms ease-in-out;
+    font-size: 2rem;
+}
+
+.btn-primary:hover {
+    background-color: rgba(0, 162, 255, 0.815);
+    opacity: 1;
+}
+
+.btn-primary:disabled {
+    background-color: rgba(204, 204, 204, 0.815);
+    opacity: 0.5;
+}
+
+.productosCarrito {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.356);
+    font-size: 1.6rem;
+    margin-bottom: 1.5rem;
+    background-color: rgba(206, 206, 206, 0.738);
+    font-weight: bold;
+}
+
+.productos {
+    margin-top: 2rem;
+    width: 60%;
+    margin-left: 10rem;
+
+    .subtitulo {
+        margin-bottom: 5rem;
+        width: 100%;
+        opacity: 0.8;
+    }
+}
+
+
+.carrito {
+    margin-top: 2rem;
+    width: 30%;
+    margin-left: 1rem;
+}
+
+.carrito {
+    .subtitulo {
+        margin-bottom: 5rem;
+        width: 100%;
+    }
+}
+
+.total {
+    margin: 0 auto;
+    padding: 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.356);
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+    font-weight: 200;
+    opacity: 0.8;
+}
+
+.mensaje {
+    text-align: center;
+    font-size: 2.5rem;
+    line-height: 1.7;
+    color: rgba(205, 205, 205, 0.674);
+    margin-top: 1.1rem;
+    height: 5rem;
+}
+
+
+/* agregar productos */
+.content-input {
+    width: 50%;
+    margin: 0 auto;
+    display: block;
+    height: 100%;
+    opacity: 0.8;
+}
+
+.form-control {
+    display: block;
+    height: 5rem;
+    width: 100rem;
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    margin-top: 1.5rem;
+    outline: none;
+    border-radius: 2rem;
+    -webkit-border-radius: 2rem;
+    -moz-border-radius: 2rem;
+    -ms-border-radius: 2rem;
+    -o-border-radius: 2rem;
+    opacity: 0.7;
+    padding-left: 2rem;
+    margin-left: 5rem;
+}
+
+.form-control:focus {
+    border: 2px solid rgb(0, 162, 255);
+}
+
+.form-control::placeholder {
+    color: rgb(7, 7, 7);
+    font-size: 1.8rem;
+    padding-left: 2rem;
+}
+
+.form-control:focus::placeholder {
+    position: absolute;
+    top: 0.5rem;
+    left: 1rem;
+    font-size: 1.6rem;
+    color: rgb(0, 162, 255);
+
+}
+
+.btn-agregar {
+    display: flex;
+    width: 30%;
+    height: 3rem;
+    font-size: 1.8rem;
+    background-color: rgb(0, 162, 255);
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 2rem;
+    -webkit-border-radius: 2rem;
+    -moz-border-radius: 2rem;
+    -ms-border-radius: 2rem;
+    -o-border-radius: 2rem;
+    opacity: 0.8;
+    margin: 0 auto;
+    margin-left: 40rem;
+    padding-left: 1.5rem;
+
+}
+
+.btn-agregar:hover {
+    background-color: rgb(0, 162, 255);
+    opacity: 1;
+}
+
+.mas__agregar {
+    display: flex;
+    font-size: 1.6rem;
+
+    padding-right: 1.5rem;
+    margin-top: 0.6rem;
+
+}
+
+
+
+/* fin de agregar productos */
+/*estilos a la pagina de Politicas */
+.article-politica,
+.article-about {
+    display: block;
+    background-color: var(--color-background);
+    margin-bottom: 1rem;
+    padding: 1rem;
+    width: 90%;
+}
+
+.titulo-politica {
+    text-align: center;
+    color: white;
+    font-size: 4rem !important;
+    margin-top: 1rem;
+    width: 100%;
+    margin-bottom: 3rem;
+    opacity: 0.8;
+}
+
+.subtitulo-politica,
+.subtitulo-about {
+    text-align: center;
+    color: white;
+    font-size: 2.5rem !important;
+    margin-top: 1rem;
+    width: 100%;
+    margin-bottom: 3rem;
+    margin-left: 1rem;
+    text-decoration: underline;
+    opacity: 0.8;
+}
+
+.text-politica,
+.text-about {
+    font-size: 2.4rem;
+    color: rgba(255, 255, 255, 0.767);
+    text-align: justify;
+    margin: 0 2rem 2rem 2rem;
+}
+
+.text-about {
+    text-align: center;
+}
+
+.lista-politica,
+.lista-about {
+    font-size: 2.1rem;
+    color: rgba(255, 255, 255, 0.767);
+    text-align: justify;
+    margin: 0 3rem 3rem 3rem;
+}
+
+/* fin de estilos a la pagina de Politicas */
+/* Estilos a la pagina de ventas */
+.subtitulo-ventas,
+.subtitulo-detalle {
+    text-align: center;
+    background-color: var(--color-background-subtitle);
+    color: white;
+    font-size: 4rem !important;
+    margin-top: 2rem !important;
+    width: 70%;
+    margin-bottom: 3rem;
+    margin: 0 auto;
+    opacity: 0.8;
+}
+
+.subtitulo-detalle {
+    margin-top: 3rem !important;
+    width: 80%;
+    margin-right: 10rem;
+}
+
+.detalleItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.356);
+    font-size: 1.8rem;
+    flex-direction: column;
+    background-color: rgba(206, 206, 206, 0.738);
+    font-weight: bold;
+    width: 80%;
+    margin-left: 2rem;
+    margin-top: 4rem;
+    opacity: 0.8;
+}
+
+.Total-detalle,
+.Fecha-detalle {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.356);
+    font-size: 2.2rem;
+    margin-bottom: 1.5rem;
+    background-color: rgba(206, 206, 206, 0.738);
+    font-weight: bold;
+    width: 80%;
+    margin-left: 2rem;
+    margin-top: 4rem;
+    opacity: 0.8;
+}
+
+.btn-danger-detalle {
+    width: 80%;
+    margin-top: 0.9rem;
+    margin-bottom: 1rem;
+    margin-left: 2rem;
+    opacity: 0.8;
+    transition: all 300ms ease-in-out;
+    font-size: 2rem;
+}
+
+.btn-danger-detalle:hover {
+    background-color: rgb(205, 5, 5);
+    opacity: 1;
+}
+
+.ventasItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.356);
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    background-color: rgba(206, 206, 206, 0.738);
+    font-weight: bold;
+    width: 60%;
+    margin-left: 20rem;
+    margin-top: 4rem;
+    opacity: 0.9;
+}
+
+.btn-info {
+    width: 21%;
+    margin-top: 0.9rem;
+    margin-bottom: 1rem;
+    margin-left: 2rem;
+    opacity: 0.8;
+    transition: all 300ms ease-in-out;
+    font-size: 2rem;
+    color: rgb(255, 255, 255);
+}
+
+.btn-info:hover {
+    background-color: rgba(24, 148, 220, 0.848);
+    opacity: 1;
+    color: rgba(255, 255, 255, 0.686);
+}
+
+.cantidad {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.356);
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    background-color: rgba(206, 206, 206, 0.738);
+    font-weight: bold;
+    width: 70%;
+    margin-left: 4.5rem;
+    margin-top: 1rem;
+    opacity: 0.9;
+    outline: none;
+    border-radius: 0.9rem;
+    -webkit-border-radius: 0.9rem;
+    -moz-border-radius: 0.9rem;
+    -ms-border-radius: 0.9rem;
+    -o-border-radius: 0.9rem;
+    padding-left: 0.9rem;
+    text-align: center;
+}
+
+.cantidad:focus {
+    border: 2px solid rgb(0, 162, 255);
+}
+
+/*formulario de actualizar productos */
+.actualizar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.356);
+    font-size: 1.4rem;
+    background-color: rgba(206, 206, 206, 0.738);
+    font-weight: bold;
+    margin-left: 0.1rem;
+    outline: none;
+    border-radius: 1rem;
+    -webkit-border-radius: 1rem;
+    -moz-border-radius: 1rem;
+    -ms-border-radius: 1rem;
+    -o-border-radius: 1rem;
+    padding-left: 1rem;
+}
+
+
+.actualizar:focus {
+    border: 2px solid rgb(0, 162, 255);
+}
+
+.label {
+    font-size: 1.5rem;
+    color: white;
+    margin-left: 1rem;
+    opacity: 0.8;
+}
+
+.botones {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    opacity: 0.8;
+    margin-top: 0.9rem;
+}
+
+.Guardar {
+    display: block;
+    width: 100%;
+    font-size: 1.7rem;
+    background-color: rgb(0, 162, 255);
+    color: white;
+    border: none;
+    cursor: pointer;
+    margin-top: 1rem;
+    border-radius: 2rem;
+    -webkit-border-radius: 2rem;
+    -moz-border-radius: 2rem;
+    -ms-border-radius: 2rem;
+    -o-border-radius: 2rem;
+    opacity: 0.8;
+    margin: 0 auto;
+    transition: all 300ms ease-in-out;
+    margin-bottom: 0.4rem;
+}
+
+.Guardar:hover {
+    background-color: rgb(0, 162, 255);
+    opacity: 1;
+}
+
+.cancelar {
+    display: block;
+    width: 100%;
+    font-size: 1.7rem;
+    background-color: rgb(255, 0, 0);
+    color: white;
+    border: none;
+    cursor: pointer;
+    margin-top: 1rem;
+    border-radius: 2rem;
+    -webkit-border-radius: 2rem;
+    -moz-border-radius: 2rem;
+    -ms-border-radius: 2rem;
+    -o-border-radius: 2rem;
+    opacity: 0.8;
+    margin: 0 auto;
+    transition: all 300ms ease-in-out;
+}
+
+
+.cancelar:hover {
+    background-color: rgb(255, 0, 0);
+    opacity: 1;
+}
+
+/* fin de estilos a la pagina de ventas */
+/* Estilos a la pagina de productos */
+.productos-agregados {
+    position: absolute;
+    align-items: center;
+    padding: 0.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.356);
+    font-size: 1.6rem;
+    margin-bottom: 1.5rem;
+    background-color: rgb(57, 57, 57);
+    font-weight: 100;
+    width: 25%;
+    margin-left: 3.3rem;
+    top: 13rem;
+    border-radius: 1.4rem;
+    opacity: 0.8;
+    min-height: 38rem;
+    max-height: 38rem;
+    overflow: hidden;
+    overflow-y: scroll;
+
+
+}
+
+.productos-agregados::-webkit-scrollbar {
+    width: 25px;
+    background: transparent;
+}
+
+
+.productos-agregados:hover::-webkit-scrollbar-thumb {
+    border: 10px solid transparent;
+    box-shadow: none;
+    border-radius: 40px;
+    box-shadow: inset 0 0 0 10px rgb(0, 238, 255);
+}
+
+.productos-agregados:hover::-webkit-scrollbar-thumb:hover {
+    box-shadow: inset 0 0 0 10px rgb(0, 238, 255);
+    border: 8px solid transparent;
+
+}
+
+
+.titulo-agregados {
+    text-align: center;
+    color: white;
+    font-size: 3rem !important;
+    margin-top: 1rem;
+    width: 100%;
+    margin-bottom: 1.5rem !important;
+    margin: 0 auto;
+}
+
+.list-agregado {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.2rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.356);
+    font-size: 1.6rem;
+    font-weight: 300;
+    width: 100%;
+    padding: 0.5rem;
+    opacity: 0.8;
+
+}
+
+.nombre-agregado {
+    width: 30%;
+    font-size: 1.4rem;
+    font-weight: 300;
+    color: white;
+    margin-right: 3rem;
+    text-transform: uppercase;
+}
+
+.registro-ventas,
+.mensajeAnular {
+    display: block;
+    width: 100%;
+    font-size: 2.8rem;
+    line-height: 5.5;
+    text-align: center;
+    opacity: 0.8;
+}
+
+
+.confirm-dialog {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.confirm-dialog-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.confirm-dialog-content h2 {
+    margin-bottom: 20px;
+}
+
+.confirm-dialog-content button {
+    margin: 5px;
+}
+
+.scroll-up-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 26px;
+    width: 50px;
+    height: 50px;
+    background-color: #000;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s, visibility 0.3s;
+
+}
+
+
+
+.scroll-up-btn.show {
+    opacity: 1;
+    visibility: visible;
+    transition: all 300ms ease-in-out;
+    -webkit-transition: all 300ms ease-in-out;
+    -moz-transition: all 300ms ease-in-out;
+    -ms-transition: all 300ms ease-in-out;
+    -o-transition: all 300ms ease-in-out;
+}
+
+.scroll-up-btn:hover {
+    scale: 1.3;
+
+}
