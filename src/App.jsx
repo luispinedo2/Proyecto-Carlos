@@ -1,6 +1,6 @@
 // App.jsx
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { Login } from './components/Login';
+
 import NavBar from './components/NavBar';
 import Home from './components/Home';
 import About from './components/About';
@@ -14,8 +14,10 @@ import DetalleVenta from './components/DetalleVenta';
 
 import React from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
+import { Login } from './components/Login';
 import { Profile } from './components/Profile';
 import { Logout } from './components/Logout';
+
 
 
 
@@ -32,6 +34,17 @@ function App() {
     return (
         <Router>
             <NavBar />
+            <header className="App-header">
+                <h1>Auth0 Example</h1>
+                {isAuthenticated ? (
+                    <div>
+                        <Profile />
+                        <Logout />
+                    </div>
+                ) : (
+                    <Login />
+                )}
+            </header>
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/about" element={<About />} />
