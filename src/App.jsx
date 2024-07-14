@@ -21,7 +21,9 @@ function App() {
     const { isLoading } = useAuth0();
 
     if (isLoading) {
-        return <div>Loading...</div>;
+        return <div>
+            <span class="loader"></span>
+        </div>;
     }
     return (
         <Router>
