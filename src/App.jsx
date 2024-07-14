@@ -1,16 +1,16 @@
 import React from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import NavBar from './components/NavBar';
-import Home from './components/Home';
-import About from './components/About';
-import ListarProducto from './components/ListarProducto';
-import AgregarProducto from './components/AgregarProducto';
-import EliminarProducto from './components/EliminarProducto';
-import ModificarProducto from './components/ModificarProducto';
-import Politicas from './components/Politicas';
-import ComprarProducto from './components/CompraProducto';
-import DetalleVenta from './components/DetalleVenta';
+import NavBar from './Navbar/NavBar';
+import Home from './Home/Home';
+import About from './About/About';
+import ListarProducto from './ListarProducto/ListarProducto';
+import AgregarProducto from './AgregarProducto/AgregarProducto';
+import EliminarProducto from './EliminarProducto/EliminarProducto';
+import ModificarProducto from './ModificarProducto/ModificarProducto';
+import Politicas from './Politicas/Politicas';
+import ComprarProducto from './CompraProducto/CompraProducto';
+import DetalleVenta from './DetalleVenta/DetalleVenta';
 
 
 
@@ -23,8 +23,6 @@ function App() {
     if (isLoading) {
         return <div>Loading...</div>;
     }
-
-
     return (
         <Router>
             <NavBar />
