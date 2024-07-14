@@ -3,7 +3,17 @@ import { useAuth0 } from "@auth0/auth0-react";
 
 export const Profile = () => {
 
-    const { user, isAuthenticated } = useAuth0();
+    const { user, isAuthenticated, loginWithRedirect, isLoading } = useAuth0();
+    if (isLoading) {
+        return <div>Loading...</div>;
+    }
+
+    if (!isAuthenticated) {
+        loginWithRedirect();
+        return <div>Redirigiendo a la página de login...</div>;
+    }
+
+
     return (
         <div>
             {isAuthenticated ? (
@@ -17,6 +27,8 @@ export const Profile = () => {
                     <h2>Por favor logueate</h2>
                 </div>
             )}
+
+            <pre>{JSON.stringify(user, null, 2)}</pre>
         </div>
     )
 
