@@ -2,9 +2,10 @@ import React, { useEffect, useState } from "react";
 import { useAuth0 } from '@auth0/auth0-react';
 import { v4 as uuidv4 } from 'uuid';
 import { CarritoItem } from "./CarritoItem"; // Ajusta esta importación según sea necesario
-import { Login } from './Login'; // Ajusta esta importación según sea necesario
-import { Logout } from './Logout'; // Ajusta esta importación según sea necesario
-import { Profile } from './Profile'; // Ajusta esta importación según sea necesario
+import { Login } from '../Login/Login'; // Ajusta esta importación según sea necesario
+import { Logout } from '../Logout/Logout'; // Ajusta esta importación según sea necesario
+import { Profile } from '../Profile/Profile'; // Ajusta esta importación según sea necesario
+import ConfirmDialog from './confirm'; // Ajusta esta importación según sea necesario
 
 export function CompraProducto() {
     const { isLoading, isAuthenticated, loginWithRedirect } = useAuth0();
@@ -14,6 +15,7 @@ export function CompraProducto() {
     const [mensaje, setMensaje] = useState("");
     const [fecha, setFecha] = useState(new Date().toLocaleDateString());
     const [compras, setCompras] = useState(JSON.parse(localStorage.getItem('compras')) || []);
+    const [mostrarConfirmacion, setMostrarConfirmacion] = useState(false);
 
     // Recuperar productos de localStorage al montar el componente
     useEffect(() => {
@@ -63,18 +65,55 @@ export function CompraProducto() {
         }
     };
 
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setMensaje("");
+        }, 5000);
+        return () => clearTimeout(timer);
+    }, [mensaje]);
     const comprar = () => {
-        const nuevaCompra = {
-            id: uuidv4(),
-            fecha,
-            productos: carrito,
-            total
-        };
-        setCompras([...compras, nuevaCompra]);
-        setMensaje("Compra realizada con éxito");
+        if (carrito.length === 0) {
+            setMensaje("El carrito está vacío");
+            return;
+        }
+        setMostrarConfirmacion(true); // Mostrar el cuadro de diálogo de confirmación
+    };
+    const confirmarCompra = () => {
+        const nuevosProductos = productos.map(producto => {
+            const productoEnCarrito = carrito.find(item => item.id === producto.id);
+            if (productoEnCarrito) {
+                return {
+                    ...producto,
+                    stock: producto.stock - productoEnCarrito.cantidad
+                };
+            }
+            return producto;
+        });
+        setProductos(nuevosProductos);
+        localStorage.setItem('productos', JSON.stringify(nuevosProductos));
+        guardarCompraEnLocalStorage();
+        setMensaje("Compra realizada con éxito. Su compra es de " + total.toLocaleString() + ". Gracias por su compra.");
         setCarrito([]);
         setTotal(0);
+        setMostrarConfirmacion(false); // Ocultar el cuadro de diálogo de confirmación
     };
+    const cancelarCompra = () => {
+        setMostrarConfirmacion(false); // Ocultar el cuadro de diálogo de confirmación
+    };
+
+    const guardarCompraEnLocalStorage = () => {
+        const nuevaCompra = {
+            id: uuidv4(),
+            fecha: new Date().toLocaleString(),
+            total: total,
+            productos: carrito
+        };
+        const nuevasCompras = [...compras, nuevaCompra];
+        setCompras(nuevasCompras);
+        localStorage.setItem('compras', JSON.stringify(nuevasCompras));
+    };
+
 
     const [showScroll, setShowScroll] = useState(false);
 
@@ -149,6 +188,15 @@ export function CompraProducto() {
                     </div>
                 </div>
             </div>
+
+            {mostrarConfirmacion && (
+                <ConfirmDialog
+                    mensaje="¿Está seguro de que desea confirmar la compra?"
+                    onConfirm={confirmarCompra}
+                    onCancel={cancelarCompra}
+                />
+            )}
+
             <div className={`scroll-up-btn ${showScroll ? 'show' : ''}`} onClick={scrollUp}>
                 <i className="bi bi-arrow-up-short"></i>
             </div>
