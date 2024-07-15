@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import '../assets/css/Main.css';
 import { v4 as uuidv4 } from 'uuid';
 import { Link } from 'react-router-dom';
-
+import { Carousel } from './carrusel';
 
 
 export function Home() {
@@ -76,6 +76,8 @@ export function Home() {
 
     return (
         <div className="container-home">
+            <Carousel />
+
             <header className="header">
                 <h1 className="titulo-header">Bienvenido a GameVerse</h1>
             </header>

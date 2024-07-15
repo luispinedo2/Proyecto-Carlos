@@ -2,6 +2,8 @@ import React from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import NavBar from './Navbar/NavBar';
+import NavBar2 from './Navbar/Navbar2';
+
 import Home from './Home/Home';
 import About from './About/About';
 import ListarProducto from './ListarProducto/ListarProducto';
@@ -21,13 +23,15 @@ function App() {
     const { isLoading } = useAuth0();
 
     if (isLoading) {
-        return <div>
-            <span class="loader"></span>
+        return <div className='logo_loader'>
+            <span className="loader"></span>
         </div>;
     }
     return (
         <Router>
+            <NavBar2 />
             <NavBar />
+
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/about" element={<About />} />
