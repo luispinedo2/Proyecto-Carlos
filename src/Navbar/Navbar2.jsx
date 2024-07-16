@@ -20,41 +20,41 @@ function NavBar2() {
 
     return (
 
-        <nav class="navbar bg-body-tertiary nav-lateral">
-            <div class="container-fluid">
-                <Link to="/" class="navbar-brand">GameVerse</Link>
-                <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
+        <nav className="navbar bg-body-tertiary nav-lateral">
+            <div className="container-fluid">
+                <Link to="/" className="navbar-brand title-nav_lateral">GameVerse</Link>
+                <button className="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+                    <span className="navbar-toggler-icon"></span>
                 </button>
-                <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
-                    <div class="offcanvas-header">
-                        <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Offcanvas</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                <div className="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+                    <div className="offcanvas-header">
+                        <h5 className="offcanvas-title" id="offcanvasNavbarLabel">Offcanvas</h5>
+                        <button type="button" className="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                     </div>
-                    <div class="offcanvas-body">
-                        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-                            <li class="nav-item">
-                                <button class="nav-link active" onClick={() => { }}>Home</button>
+                    <div className="offcanvas-body">
+                        <ul className="navbar-nav justify-content-end flex-grow-1 pe-3">
+                            <li className="nav-item">
+                                <button className="nav-link active" onClick={() => { }}>Home</button>
                             </li>
-                            <li class="nav-item">
-                                <button class="nav-link" onClick={() => { }}>Link</button>
+                            <li className="nav-item">
+                                <button className="nav-link" onClick={() => { }}>Link</button>
                             </li>
-                            <li class="nav-item dropdown">
-                                <button class="nav-link dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false"></button>
+                            <li className="nav-item dropdown">
+                                <button className="nav-link dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false"></button>
                                 Dropdown
-                                <ul class="dropdown-menu">
-                                    <li><button class="dropdown-item" onClick={() => { }}>Action</button></li>
-                                    <li><button class="dropdown-item" onClick={() => { }}>Another action</button></li>
+                                <ul className="dropdown-menu">
+                                    <li><button className="dropdown-item" onClick={() => { }}>Action</button></li>
+                                    <li><button className="dropdown-item" onClick={() => { }}>Another action</button></li>
                                     <li>
-                                        <hr className="dropdown-divider" />
+                                        <hr classNameName="dropdown-divider" />
                                     </li>
-                                    <li><button class="dropdown-item" onClick={() => { }}>Something else here</button></li>
+                                    <li><button className="dropdown-item" onClick={() => { }}>Something else here</button></li>
                                 </ul>
                             </li>
                         </ul>
-                        <form class="d-flex mt-3" role="search">
-                            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-                            <button class="btn btn-outline-success" type="submit">Search</button>
+                        <form className="d-flex mt-3" role="search">
+                            <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
+                            <button className="btn btn-outline-success" type="submit">Search</button>
                         </form>
                     </div>
                 </div>

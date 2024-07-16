@@ -65,20 +65,28 @@ export function CompraProducto() {
         }
     };
 
-
     useEffect(() => {
         const timer = setTimeout(() => {
             setMensaje("");
-        }, 5000);
+        }, 8000);
         return () => clearTimeout(timer);
     }, [mensaje]);
+
     const comprar = () => {
+        if (!isAuthenticated) {
+            setMensaje("Para realizar una compra, debes iniciar sesión.");
+
+            loginWithRedirect();
+            return;
+        }
+
         if (carrito.length === 0) {
             setMensaje("El carrito está vacío");
             return;
         }
         setMostrarConfirmacion(true); // Mostrar el cuadro de diálogo de confirmación
     };
+
     const confirmarCompra = () => {
         const nuevosProductos = productos.map(producto => {
             const productoEnCarrito = carrito.find(item => item.id === producto.id);
@@ -98,6 +106,7 @@ export function CompraProducto() {
         setTotal(0);
         setMostrarConfirmacion(false); // Ocultar el cuadro de diálogo de confirmación
     };
+
     const cancelarCompra = () => {
         setMostrarConfirmacion(false); // Ocultar el cuadro de diálogo de confirmación
     };
@@ -113,7 +122,6 @@ export function CompraProducto() {
         setCompras(nuevasCompras);
         localStorage.setItem('compras', JSON.stringify(nuevasCompras));
     };
-
 
     const [showScroll, setShowScroll] = useState(false);
 
@@ -137,27 +145,9 @@ export function CompraProducto() {
     };
 
 
-    // Autenticación
-    if (isLoading) {
-        return <div>Loading...</div>;
-    }
-
-    if (!isAuthenticated) {
-        return (
-            <div>
-                <h2>Para realizar una compra, debes iniciar sesión.</h2>
-                <Login />
-            </div>
-        );
-    }
 
     return (
         <div>
-            <header>
-                <h1>Compra Producto</h1>
-                <Profile />
-                <Logout />
-            </header>
             <div className="row">
                 <div className="col-8 productos">
                     <h1 className="subtitulo">Productos Disponibles</h1>

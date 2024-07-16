@@ -2,7 +2,7 @@ import { Home } from "../Home/Home"
 
 export function PaginaPrincipal() {
     return <>
-        <div>
+        <div className="container-principal">
             <Home />
 
         </div>

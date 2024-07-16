@@ -27,6 +27,7 @@ body {
 }
 
 
+
 .logo_loader {
     display: flex;
     justify-content: center;
@@ -59,14 +60,91 @@ body {
 
 }
 
-
+/*menu lateral*/
 .nav-lateral {
     z-index: 9999;
     margin-top: 1rem;
 }
 
+.title-nav_lateral {
+    color: rgb(8, 8, 8);
+    font-size: 2.5rem;
+    margin-left: 1rem;
 
 
+}
+
+.nav-iniciar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-left: 1rem;
+    margin-right: 5rem;
+    margin-bottom: 1rem;
+    gap: 1rem;
+    cursor: pointer;
+    height: 10% !important;
+}
+
+
+.btn-login {
+    display: block;
+    width: 100%;
+    font-size: 2rem;
+    background-color: rgb(0, 162, 255);
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 1rem;
+    -webkit-border-radius: 1rem;
+    -moz-border-radius: 1rem;
+    -ms-border-radius: 1rem;
+    -o-border-radius: 1rem;
+    opacity: 0.8;
+    transition: all 300ms ease-in-out;
+    margin-top: 1rem;
+}
+
+.btn-login:hover {
+    background-color: rgb(0, 162, 255);
+    opacity: 1;
+    color: white;
+}
+
+.nav-login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-left: 1rem;
+    margin-right: 5rem;
+
+}
+
+.dropdown-menu {
+    background-color: #000000;
+    border: none;
+}
+
+.dropdown-item {
+    font-size: 1.7rem;
+    cursor: pointer;
+    transition: all 300ms ease-in-out;
+    -webkit-transition: all 300ms ease-in-out;
+    -moz-transition: all 300ms ease-in-out;
+    -ms-transition: all 300ms ease-in-out;
+    -o-transition: all 300ms ease-in-out;
+    color: white;
+}
+
+.dropdown-item:hover {
+    background-color: rgba(0, 162, 255, 0.815);
+    color: rgb(255, 255, 255);
+    opacity: 1;
+}
+
+/*de los link de la barra de navegacion */
 .navbar {
     background-color: var(--color-background);
     margin-top: 1rem;
@@ -83,9 +161,6 @@ body {
     -moz-border-radius: 10rem;
     -ms-border-radius: 10rem;
     -o-border-radius: 10rem;
-
-
-
 }
 
 .menu-list {
@@ -338,6 +413,7 @@ body {
 .titulo-agregar {
     margin-left: 28rem;
     margin-bottom: 2rem;
+    margin-top: 2rem;
 }
 
 .contentCarrito {
@@ -419,6 +495,7 @@ body {
     margin-bottom: 1.5rem;
     background-color: rgba(206, 206, 206, 0.738);
     font-weight: bold;
+
 }
 
 .productos {
@@ -438,6 +515,7 @@ body {
     margin-top: 2rem;
     width: 30%;
     margin-left: 1rem;
+    z-index: -1;
 }
 
 .carrito {
@@ -843,6 +921,7 @@ body {
     max-height: 38rem;
     overflow: hidden;
     overflow-y: scroll;
+    margin-top: 7rem;
 
 
 }
@@ -1022,6 +1101,7 @@ body {
     background-color: #ffffff0a;
     width: 99%;
     height: 50%;
+    z-index: -1;
 
 }
 

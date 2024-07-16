@@ -57,39 +57,41 @@ function NavBar() {
                             <Link to="/CompraProducto" className={isActive('/CompraProducto')}>Comprar Producto</Link>
                         </li>
                     </ul>
+                    <div>
+                        {isAuthenticated ? (
+                            <div className="navbar-nav ml-auto nav-login">
+                                <div className="dropdown dropdown-login">
+                                    <img
+                                        src={user.picture}
+                                        alt="Profile"
+                                        className="profile-img dropdown-toggle"
+                                        data-bs-toggle="dropdown"
+                                    />
+                                    <ul className="dropdown-menu dropdown-menu_login">
+                                        <li>
+                                            <button className="dropdown-item" onClick={() => { }}>Perfil</button>
 
-                    {isAuthenticated ? (
-                        <div className="navbar-nav ml-auto">
-                            <div className="dropdown">
-                                <img
-                                    src={user.picture}
-                                    alt="Profile"
-                                    className="profile-img dropdown-toggle"
-                                    data-bs-toggle="dropdown"
-                                />
-                                <ul className="dropdown-menu">
-                                    <li>
-                                        <Profile />
-                                    </li>
-                                    <li>
-                                        <Link to="/settings" className="dropdown-item">Configuraciones</Link>
-                                    </li>
-                                    <li>
-                                        <button
-                                            className="dropdown-item"
-                                            onClick={() => logout({ returnTo: window.location.origin })}
-                                        >
-                                            Cerrar Sesión
-                                        </button>
-                                    </li>
-                                </ul>
+                                        </li>
+                                        <li>
+                                            <Link to="/settings" className="dropdown-item">Configuraciones</Link>
+                                        </li>
+                                        <li>
+                                            <button
+                                                className="dropdown-item"
+                                                onClick={() => logout({ returnTo: window.location.origin })}
+                                            >
+                                                Cerrar Sesión
+                                            </button>
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
-                        </div>
-                    ) : (
-                        <div className="navbar-nav ml-auto nav-iniciar">
-                            <button className="btn btn-primary" onClick={() => loginWithRedirect()}>Iniciar Sesión</button>
-                        </div>
-                    )}
+                        ) : (
+                            <div className="navbar-nav nav-iniciar">
+                                <button className="btn  btn-login" onClick={() => loginWithRedirect()}>Iniciar Sesión</button>
+                            </div>
+                        )}
+                    </div>
                 </div>
             </div>
         </nav>
