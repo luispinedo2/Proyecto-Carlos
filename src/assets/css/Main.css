@@ -203,8 +203,7 @@ body {
     margin-right: 1rem;
     border-radius: 50%;
     margin-bottom: 1rem;
-    margin-left: 2rem;
-
+    margin-left: 1rem;
 
 }
 
@@ -215,6 +214,11 @@ body {
     margin-top: 5rem;
 }
 
+.bi-person-circle {
+    font-size: 7rem !important;
+    margin-left: 2rem !important;
+
+}
 
 .nav-lateral {
     z-index: 9999;
@@ -224,15 +228,8 @@ body {
 }
 
 .nav-item-user {
-
     margin-left: 1rem;
-
 }
-
-
-
-
-
 
 .offcanvas {
     background-color: rgb(0, 162, 255) !important;
@@ -466,16 +463,12 @@ body {
     margin-right: 10rem;
 }
 
-
-
 .nav-link {
     color: rgb(0, 0, 0);
     text-decoration: none;
     cursor: pointer;
     font-size: 2rem;
 }
-
-
 
 .nav-link:hover {
     color: rgb(255, 255, 255) !important;
@@ -763,6 +756,17 @@ body {
 
 /*Botones*/
 
+.btn-person-circle {
+    display: block;
+    font-size: 2rem;
+    border: none;
+    cursor: pointer;
+    border: none;
+    background-color: transparent;
+    margin-right: 30rem;
+
+
+}
 
 .btn-category {
     display: block;

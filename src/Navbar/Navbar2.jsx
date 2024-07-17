@@ -113,7 +113,9 @@ function NavBar2() {
                             </ul>
                         </div>
                     ) : (
-                        <i class="bi bi-person-circle icon-custom-color"></i>
+                        <button className="btn-person-circle" onClick={() => loginWithRedirect()}>
+                            <i class="bi bi-person-circle"></i>
+                        </button>
                     )}
 
                     <div className="offcanvas-body">
@@ -153,7 +155,7 @@ function NavBar2() {
                     </div>
                 </div>
             </div>
-        </nav>
+        </nav >
     );
 }
 
