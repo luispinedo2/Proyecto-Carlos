@@ -42,6 +42,11 @@ function App() {
                 <Route path="/Politicas" element={<Politicas />} />
                 <Route path="/CompraProducto" element={<ComprarProducto />} />
                 <Route path="/DetalleVenta" element={<DetalleVenta />} />
+                <Route path="/categoria/action" element={<div>Acción</div>} />
+                <Route path="/categoria/adventure" element={<div>Aventura</div>} />
+                <Route path="/categoria/rpg" element={<div>RPG</div>} />
+                <Route path="/categoria/sports" element={<div>Deportes</div>} />
+                <Route path="/categoria/shooter" element={<div>Shooter</div>} />
             </Routes>
 
         </Router>
