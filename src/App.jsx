@@ -42,13 +42,20 @@ function App() {
                 <Route path="/Politicas" element={<Politicas />} />
                 <Route path="/CompraProducto" element={<ComprarProducto />} />
                 <Route path="/DetalleVenta" element={<DetalleVenta />} />
-                <Route path="/categoria/action" element={<div>Acción</div>} />
-                <Route path="/categoria/adventure" element={<div>Aventura</div>} />
-                <Route path="/categoria/rpg" element={<div>RPG</div>} />
-                <Route path="/categoria/sports" element={<div>Deportes</div>} />
-                <Route path="/categoria/shooter" element={<div>Shooter</div>} />
-            </Routes>
+                <Route path="/categoria/plataformas" element={<div>Plataformas</div>} />
+                <Route path="/categoria/battle-royale" element={<div>Battle Royale</div>} />
+                <Route path="/categoria/aventura" element={<div>Aventura</div>} />
+                <Route path="/categoria/arcade" element={<div>Arcade</div>} />
+                <Route path="/categoria/accion" element={<div>Acción</div>} />
+                <Route path="/categoria/tiro" element={<div>Tiro</div>} />
+                <Route path="/categoria/fps" element={<div>FPS</div>} />
+                <Route path="/categoria/tps" element={<div>TPS</div>} />
+                <Route path="/categoria/supervivencia" element={<div>Supervivencia</div>} />
+                <Route path="/categoria/terror" element={<div>Terror</div>} />
+                <Route path="/categoria/deportes" element={<div>Deportes</div>} />
+                <Route path="/categoria/lucha" element={<div>Lucha</div>} />
 
+            </Routes>
         </Router>
 
     );

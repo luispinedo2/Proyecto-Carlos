@@ -9,10 +9,12 @@ function NavBar() {
 
             {/*ingresar la ubicacion del cliente*/}
             <div className="d-flex">
-                <Link to="/Ubicacion" className="navbar-brand title-nav_lateral-ubicacion">
+                <Link to="/Ubicacion" className="title-nav_lateral-ubicacion">
                     <i class="bi bi-geo-alt">
-                        Ingresa tu ubicación
+
                     </i>
+                    Ingresa tu ubicación
+
                 </Link>
             </div>
 

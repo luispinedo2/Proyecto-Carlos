@@ -31,7 +31,7 @@ function NavBar2() {
                 <Link to="/" className="title-nav_lateral">GameVerse</Link> {/* Enlace a la página principal */}
 
                 {/* Categorías de productos */}
-                <div className="container-category">
+                <div className="d-block container-category">
                     <div className="dropdown">
                         <button
                             className="btn btn-category dropdown-toggle"
@@ -40,24 +40,35 @@ function NavBar2() {
                             data-bs-toggle="dropdown"
                             aria-expanded="false"
                         >
-                            Categorias
+                            <span className='title-category'>
+                                Categorías
+                            </span>
                         </button>
                         <ul className="dropdown-menu menu-category" aria-labelledby="dropdownMenuButton">
-                            <li><Link className="dropdown-item category-item" to="/categoria/action">Acción</Link></li>
-                            <li><Link className="dropdown-item category-item" to="/categoria/adventure">Aventura</Link></li>
-                            <li><Link className="dropdown-item category-item" to="/categoria/rpg">RPG</Link></li>
-                            <li><Link className="dropdown-item category-item" to="/categoria/sports">Deportes</Link></li>
-                            <li><Link className="dropdown-item category-item" to="/categoria/shooter">Shooter</Link></li>
+                            <li><Link className="dropdown-item category-item" to="/categoria/plataformas">Plataformas</Link></li>
+                            <li><Link className="dropdown-item category-item" to="/categoria/battle-royale">Battle Royale</Link></li>
+                            <li><Link className="dropdown-item category-item" to="/categoria/aventura">Aventura</Link></li>
+                            <li><Link className="dropdown-item category-item" to="/categoria/arcade">Arcade</Link></li>
+                            <li><Link className="dropdown-item category-item" to="/categoria/accion">Acción</Link></li>
+                            <li><Link className="dropdown-item category-item" to="/categoria/tiro">Tiro</Link></li>
+                            <li><Link className="dropdown-item category-item" to="/categoria/fps">FPS</Link></li>
+                            <li><Link className="dropdown-item category-item" to="/categoria/tps">TPS</Link></li>
+                            <li><Link className="dropdown-item category-item" to="/categoria/supervivencia">Supervivencia</Link></li>
+                            <li><Link className="dropdown-item category-item" to="/categoria/terror">Terror</Link></li>
+                            <li><Link className="dropdown-item category-item" to="/categoria/deportes">Deportes</Link></li>
+                            <li><Link className="dropdown-item category-item" to="/categoria/lucha">Lucha</Link></li>
                         </ul>
                     </div>
                 </div>
 
                 {/* Formulario de búsqueda de productos */}
-                <form className="container-form">
-                    <input className="input-search" type="search" placeholder="Buscar productos" aria-label="Search" /> {/* Campo de búsqueda */}
-                    <button className="btn-search" type="submit">
-                        <i className="bi bi-search"></i> {/* Icono de búsqueda */}
-                    </button>
+                <form className="">
+                    <div className='container-form'>
+                        <input className="input-search" type="search" placeholder="Buscar productos" aria-label="Search" /> {/* Campo de búsqueda */}
+                        <button className="btn-search" type="submit">
+                            <i className="bi bi-search"></i> {/* Icono de búsqueda */}
+                        </button>
+                    </div>
                 </form>
 
                 {/* Mis compras */}
