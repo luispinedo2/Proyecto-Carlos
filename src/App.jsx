@@ -3,7 +3,6 @@ import { useAuth0 } from '@auth0/auth0-react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import NavBar from './Navbar/NavBar';
 import NavBar2 from './Navbar/Navbar2';
-
 import Home from './Home/Home';
 import About from './About/About';
 import ListarProducto from './ListarProducto/ListarProducto';
@@ -13,13 +12,8 @@ import ModificarProducto from './ModificarProducto/ModificarProducto';
 import Politicas from './Politicas/Politicas';
 import ComprarProducto from './CompraProducto/CompraProducto';
 import DetalleVenta from './DetalleVenta/DetalleVenta';
-
-
-
-
+import MisCompras from './DetalleVenta/MisCompras';
 function App() {
-
-
     const { isLoading } = useAuth0();
 
     if (isLoading) {
@@ -42,6 +36,7 @@ function App() {
                 <Route path="/Politicas" element={<Politicas />} />
                 <Route path="/CompraProducto" element={<ComprarProducto />} />
                 <Route path="/DetalleVenta" element={<DetalleVenta />} />
+                <Route path="/MisCompras" element={<MisCompras />} />
                 <Route path="/categoria/plataformas" element={<div>Plataformas</div>} />
                 <Route path="/categoria/battle-royale" element={<div>Battle Royale</div>} />
                 <Route path="/categoria/aventura" element={<div>Aventura</div>} />

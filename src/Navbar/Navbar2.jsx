@@ -72,11 +72,15 @@ function NavBar2() {
                 </form>
 
                 {/* Mis compras */}
-                <div className="container-compras">
-                    <Link to="/MisCompras" className="title-nav__compras">
-                        Mis Compras
-                    </Link>
-                </div>
+                {isAuthenticated ? (
+                    <div className="container-compras">
+                        <Link to="/MisCompras" className="title-nav__compras">
+                            Mis Compras
+                        </Link>
+                    </div>
+                ) : (
+                    <div className='container-compras'></div>
+                )}
 
                 {/* Botón "me encanta" */}
                 <div className="container-reaccion">
@@ -87,7 +91,7 @@ function NavBar2() {
 
                 {/* Autenticación */}
                 {isAuthenticated ? (
-                    <div className="navbar-nav nav-perfil">
+                    <div className="navbar-nav nav-salir">
                         <button className="btn btn-logout" onClick={() => logout()}>Cerrar Sesión</button> {/* Botón de cerrar sesión */}
                     </div>
                 ) : (
@@ -97,10 +101,10 @@ function NavBar2() {
                 )}
 
                 {/* Botón para abrir menú lateral en dispositivos móviles */}
-                <button className="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+                <button className="navbar-toggler icon__list" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
                     <i className="bi bi-list"></i> {/* Icono de lista */}
                 </button>
-                <div className="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+                <div className="offcanvas offcanvas-end" tabIndex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
                     <div className="offcanvas-header">
                         <button type="button" className="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button> {/* Botón para cerrar el menú lateral */}
                     </div>
@@ -125,7 +129,7 @@ function NavBar2() {
                         </div>
                     ) : (
                         <button className="btn-person-circle" onClick={() => loginWithRedirect()}>
-                            <i class="bi bi-person-circle"></i>
+                            <i className="bi bi-person-circle"></i>
                         </button>
                     )}
 
@@ -139,21 +143,28 @@ function NavBar2() {
                             </li>
                             {roles.includes('admin') && ( /* Si el usuario tiene el rol de admin, muestra opciones adicionales */
                                 <>
-                                    <li className="nav-item">
-                                        <Link to="/ListarProducto" className={isActive('/ListarProducto')}>Listar Productos</Link> {/* Enlace a Listar Productos */}
+                                    <li className="nav-item dropdown">
+                                        <a className="nav-link dropdown-toggle" href="/" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            Crud Productos
+                                        </a>
+                                        <ul className="dropdown-menu dropdown-menu-dark">
+
+                                            <li className="nav-item dropdown-item d-block">
+                                                <Link to="/AgregarProducto" className={isActive('/AgregarProducto')}>Agregar Producto</Link> {/* Enlace a Agregar Producto */}
+                                            </li>
+                                            <li className="nav-item dropdown-item">
+                                                <Link to="/EliminarProducto" className={isActive('/EliminarProducto')}>Eliminar Producto</Link> {/* Enlace a Eliminar Producto */}
+                                            </li>
+                                            <li className="nav-item dropdown-item">
+                                                <Link to="/ModificarProducto" className={isActive('/ModificarProducto')}>Modificar Producto</Link> {/* Enlace a Modificar Producto */}
+                                            </li>
+                                            <li className="nav-item dropdown-item">
+                                                <Link to="/DetalleVenta" className={isActive('/DetalleVenta')}>Detalle de Venta</Link> {/* Enlace a Detalle de Venta */}
+                                            </li>
+                                        </ul>
                                     </li>
-                                    <li className="nav-item">
-                                        <Link to="/AgregarProducto" className={isActive('/AgregarProducto')}>Agregar Producto</Link> {/* Enlace a Agregar Producto */}
-                                    </li>
-                                    <li className="nav-item">
-                                        <Link to="/EliminarProducto" className={isActive('/EliminarProducto')}>Eliminar Producto</Link> {/* Enlace a Eliminar Producto */}
-                                    </li>
-                                    <li className="nav-item">
-                                        <Link to="/ModificarProducto" className={isActive('/ModificarProducto')}>Modificar Producto</Link> {/* Enlace a Modificar Producto */}
-                                    </li>
-                                    <li className="nav-item">
-                                        <Link to="/DetalleVenta" className={isActive('/DetalleVenta')}>Detalle de Venta</Link> {/* Enlace a Detalle de Venta */}
-                                    </li>
+
+
                                 </>
                             )}
                             <li className="nav-item">

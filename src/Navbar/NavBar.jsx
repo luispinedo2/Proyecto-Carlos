@@ -5,17 +5,10 @@ import { Profile } from '../Profile/Profile'; // Ajusta esta importación según
 
 function NavBar() {
     return (
-        <nav className="navbar navbar-expand-lg navbar-dark">
+        <nav>
 
             {/*ingresar la ubicacion del cliente*/}
-            <div className="d-flex">
-                <Link to="/Ubicacion" className="title-nav_lateral-ubicacion">
-                    <i class="bi bi-geo-alt">
-
-                    </i>
-                    Ingresa tu ubicación
-
-                </Link>
+            <div>
             </div>
 
         </nav >
