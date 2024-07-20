@@ -114,15 +114,18 @@ export function Home() {
             </article>
             <section className="productos">
                 {/*mostrar los productos que se encuentran en el local storage*/}
-                <div className="container mt-4">
+                <div className="">
                     <h1 className="titulo-productos">Productos Disponibles</h1>
                     <p className="text-compra">Si desea comprar ir al siguiente enlace
                         <i className="bi bi-arrow-down"></i>
                     </p>
                     <Link to="/CompraProducto" className="link-compra">Comprar Productos</Link>
-                    <div className="row">
+                    <div className="productos-category">
                         {filteredProducts.map(producto => (
-                            <div key={producto.id} className="col-12 col-md-6 col-lg-4">
+                            <div key={producto.id} className="">
+                                <p>
+                                    {producto.categoria}
+                                </p>
                                 <div className="card">
                                     <img src={producto.imagen} className="card-img-top" alt="..." />
                                     <div className="card-body">

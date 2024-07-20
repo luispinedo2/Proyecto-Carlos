@@ -145,7 +145,7 @@ export function CompraProducto() {
 
     return (
         <div className="containerProductos" >
-            <div className="row">
+            <div className="">
                 <nav className="navbar-dark ">
                     <div className="container-fluid">
                         <div className="navbar-carrito">

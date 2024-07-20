@@ -33,7 +33,10 @@ function NavBar2() {
     return (
         <nav className="nav-lateral">
             <div className="container-lateral">
-                <Link to="/" className="title-nav_lateral">GameVerse</Link> {/* Enlace a la página principal */}
+                <Link to="/" className="title-nav_lateral">
+
+                    GameVerse
+                    <i class="bi bi-controller"></i></Link> {/* Enlace a la página principal */}
 
                 {/* Categorías de productos */}
                 <div className="d-block container-category">
@@ -79,11 +82,10 @@ function NavBar2() {
 
                 {/* Mis compras */}
                 {isAuthenticated ? (
-                    <div className="container-compras">
-                        <Link to="/MisCompras" className="title-nav__compras">
-                            Mis Compras
-                        </Link>
-                    </div>
+
+                    <Link to="/MisCompras" className="title-nav__compras">
+                        Mis Compras
+                    </Link>
                 ) : (
                     <div className='container-compras'></div>
                 )}
@@ -114,33 +116,30 @@ function NavBar2() {
                     <div className="offcanvas-header">
                         <button type="button" className="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button> {/* Botón para cerrar el menú lateral */}
                     </div>
-                    {isAuthenticated ? (
-                        <div className="container-user">
-                            <img
-                                src={user.picture}
-                                alt="Profile"
-                                className="profile-img"
-                            /> {/* Imagen de perfil */}
-                            <span className="name-user">
-                                {user.name}
-                            </span>
-                            <ul className="navbar-nav menu-list">
-                                <li className="nav-item-user">
-                                    <Link to="/perfil" className={isActive('/perfil')}>Perfil</Link> {/* Enlace al perfil */}
-                                </li>
-                                <li className="nav-item-user">
-                                    <Link to="/settings" className={isActive('/settings')}>Configuración</Link> {/* Enlace a configuración */}
-                                </li>
-                            </ul>
-                        </div>
-                    ) : (
-                        <button className="btn-person-circle" onClick={() => loginWithRedirect()}>
-                            <i className="bi bi-person-circle"></i>
-                        </button>
-                    )}
+
 
                     <div className="offcanvas-body">
                         <ul className="navbar-nav menu-list" aria-labelledby="dropdownMenuButton">
+                            {isAuthenticated ? (
+                                <div className="container-user">
+                                    <img
+                                        src={user.picture}
+                                        alt="Profile"
+                                        className="profile-img"
+                                    /> {/* Imagen de perfil */}
+                                    <span className="name-user">
+                                        {user.name}
+                                    </span>
+                                </div>
+                            ) : (
+                                <button className="btn-person-circle" onClick={() => loginWithRedirect()}>
+                                    <i className="bi bi-person-circle"></i>
+                                </button>
+                            )}
+
+                            <li className="nav-item">
+                                <Link to="/profile" className={isActive('/profile')}>Perfil y Configuración</Link> {/* Enlace al perfil */}
+                            </li>
                             <li className="nav-item">
                                 <Link to="/" className={isActive('/')}>Inicio</Link> {/* Enlace a Inicio */}
                             </li>

@@ -13,6 +13,7 @@ import Politicas from './Politicas/Politicas';
 import ComprarProducto from './CompraProducto/CompraProducto';
 import DetalleVenta from './DetalleVenta/DetalleVenta';
 import MisCompras from './DetalleVenta/MisCompras';
+import Profile from './Profile/Profile';
 function App() {
     const { isLoading } = useAuth0();
 
@@ -29,6 +30,7 @@ function App() {
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/about" element={<About />} />
+                <Route path="/profile" element={<Profile />} />
                 <Route path="/ListarProducto" element={<ListarProducto />} />
                 <Route path="/AgregarProducto" element={<AgregarProducto />} />
                 <Route path="/EliminarProducto" element={<EliminarProducto />} />
