@@ -37,19 +37,18 @@ function App() {
                 <Route path="/CompraProducto" element={<ComprarProducto />} />
                 <Route path="/DetalleVenta" element={<DetalleVenta />} />
                 <Route path="/MisCompras" element={<MisCompras />} />
-                <Route path="/categoria/plataformas" element={<div>Plataformas</div>} />
-                <Route path="/categoria/battle-royale" element={<div>Battle Royale</div>} />
-                <Route path="/categoria/aventura" element={<div>Aventura</div>} />
-                <Route path="/categoria/arcade" element={<div>Arcade</div>} />
-                <Route path="/categoria/accion" element={<div>Acción</div>} />
-                <Route path="/categoria/tiro" element={<div>Tiro</div>} />
-                <Route path="/categoria/fps" element={<div>FPS</div>} />
-                <Route path="/categoria/tps" element={<div>TPS</div>} />
-                <Route path="/categoria/supervivencia" element={<div>Supervivencia</div>} />
-                <Route path="/categoria/terror" element={<div>Terror</div>} />
-                <Route path="/categoria/deportes" element={<div>Deportes</div>} />
-                <Route path="/categoria/lucha" element={<div>Lucha</div>} />
-
+                <Route path="/categoria/plataformas" element={<Home category="plataformas" />} />
+                <Route path="/categoria/battle-royale" element={<Home category="battle-royale" />} />
+                <Route path="/categoria/aventura" element={<Home category="aventura" />} />
+                <Route path="/categoria/arcade" element={<Home category="arcade" />} />
+                <Route path="/categoria/accion" element={<Home category="accion" />} />
+                <Route path="/categoria/tiro" element={<Home category="tiro" />} />
+                <Route path="/categoria/fps" element={<Home category="fps" />} />
+                <Route path="/categoria/tps" element={<Home category="tps" />} />
+                <Route path="/categoria/supervivencia" element={<Home category="supervivencia" />} />
+                <Route path="/categoria/terror" element={<Home category="terror" />} />
+                <Route path="/categoria/deportes" element={<Home category="deportes" />} />
+                <Route path="/categoria/lucha" element={<Home category="lucha" />} />
             </Routes>
         </Router>
 

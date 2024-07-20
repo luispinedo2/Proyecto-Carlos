@@ -19,6 +19,7 @@ export function DetalleVenta() {
         //se muestra la venta seleccionada
         setVentaSeleccionada(venta);
     };
+    /*
     // Función para anular una venta
     const anularVenta = (id) => {
         //se filtra la venta seleccionada el filter devuelve un nuevo array con las ventas que no sean la seleccionada
@@ -48,7 +49,7 @@ export function DetalleVenta() {
             setMensaje("");
         }, 5000);
     };
-
+*/
 
     const [showScroll, setShowScroll] = useState(false);
 
@@ -103,10 +104,13 @@ export function DetalleVenta() {
                             </ul>
                             <h3 className="Total-detalle">Total: ${ventaSeleccionada.total.toLocaleString()}</h3>
                             <h4 className="Fecha-detalle">Fecha: {ventaSeleccionada.fecha.toLocaleString()}</h4>
+                            {/*
                             <button className="btn btn-danger  btn-danger-detalle" onClick={() => anularVenta(ventaSeleccionada.id)}>Anular Venta</button>
+                            */}
                         </>
                     )}
-                    {mensaje && <h3 className="mensajeAnular">{mensaje}</h3>}
+                    {/*mostrar mensaje de anulación*
+                    {mensaje && <h3 className="mensajeAnular">{mensaje}</h3>}*/}
                 </div>
             </div>
 

@@ -1,6 +1,5 @@
 
 import React, { useEffect, useState } from "react";
-import '../assets/css/Main.css';
 
 export function MisCompras() {
     // Estado para almacenar las ventas

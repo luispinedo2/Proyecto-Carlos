@@ -1,10 +1,11 @@
 import React from 'react'; // Importa React
-import { Link, useLocation } from 'react-router-dom'; // Importa Link y useLocation de react-router-dom para la navegación
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react'; // Importa el hook useAuth0 de Auth0 para la autenticación
 import { useState } from 'react'; // Importa useState de React para manejar el estado
 
 function NavBar2() {
     const location = useLocation(); // Obtiene la ubicación actual de la aplicación
+    const navigate = useNavigate();
     const { user, isAuthenticated, logout, loginWithRedirect } = useAuth0(); // Obtiene información del usuario y métodos de autenticación de Auth0
 
     // Función para aplicar clase activa a los enlaces
@@ -24,6 +25,10 @@ function NavBar2() {
     const handleClick = () => {
         setLiked(!liked); // Invierte el estado de "liked"
     }
+
+    const handleCategoryClick = (category) => {
+        navigate(`/?category=${category}`);
+    };
 
     return (
         <nav className="nav-lateral">
@@ -45,18 +50,19 @@ function NavBar2() {
                             </span>
                         </button>
                         <ul className="dropdown-menu menu-category" aria-labelledby="dropdownMenuButton">
-                            <li><Link className="dropdown-item category-item" to="/categoria/plataformas">Plataformas</Link></li>
-                            <li><Link className="dropdown-item category-item" to="/categoria/battle-royale">Battle Royale</Link></li>
-                            <li><Link className="dropdown-item category-item" to="/categoria/aventura">Aventura</Link></li>
-                            <li><Link className="dropdown-item category-item" to="/categoria/arcade">Arcade</Link></li>
-                            <li><Link className="dropdown-item category-item" to="/categoria/accion">Acción</Link></li>
-                            <li><Link className="dropdown-item category-item" to="/categoria/tiro">Tiro</Link></li>
-                            <li><Link className="dropdown-item category-item" to="/categoria/fps">FPS</Link></li>
-                            <li><Link className="dropdown-item category-item" to="/categoria/tps">TPS</Link></li>
-                            <li><Link className="dropdown-item category-item" to="/categoria/supervivencia">Supervivencia</Link></li>
-                            <li><Link className="dropdown-item category-item" to="/categoria/terror">Terror</Link></li>
-                            <li><Link className="dropdown-item category-item" to="/categoria/deportes">Deportes</Link></li>
-                            <li><Link className="dropdown-item category-item" to="/categoria/lucha">Lucha</Link></li>
+
+                            <li><span className="dropdown-item category-item" onClick={() => handleCategoryClick('Plataformas')}>Plataformas</span></li>
+                            <li><span className="dropdown-item category-item" onClick={() => handleCategoryClick('Battle Royale')}>Battle Royale</span></li>
+                            <li><span className="dropdown-item category-item" onClick={() => handleCategoryClick('Aventura')}>Aventura</span></li>
+                            <li><span className="dropdown-item category-item" onClick={() => handleCategoryClick('Arcade')}>Arcade</span></li>
+                            <li><span className="dropdown-item category-item" onClick={() => handleCategoryClick('Acción')}>Acción</span></li>
+                            <li><span className="dropdown-item category-item" onClick={() => handleCategoryClick('Tiro')}>Tiro</span></li>
+                            <li><span className="dropdown-item category-item" onClick={() => handleCategoryClick('FPS')}>FPS</span></li>
+                            <li><span className="dropdown-item category-item" onClick={() => handleCategoryClick('TPS')}>TPS</span></li>
+                            <li><span className="dropdown-item category-item" onClick={() => handleCategoryClick('Supervivencia')}>Supervivencia</span></li>
+                            <li><span className="dropdown-item category-item" onClick={() => handleCategoryClick('Terror')}>Terror</span></li>
+                            <li><span className="dropdown-item category-item" onClick={() => handleCategoryClick('Deportes')}>Deportes</span></li>
+                            <li><span className="dropdown-item category-item" onClick={() => handleCategoryClick('Lucha')}>Lucha</span></li>
                         </ul>
                     </div>
                 </div>

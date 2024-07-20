@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import '../assets/css/Main.css';
 import { v4 as uuidv4 } from 'uuid';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Carousel } from './carrusel';
 
 
@@ -39,18 +39,6 @@ export function Home() {
 
 
     const [productos, setProductos] = useState(productosinicial);
-    const [filteredProducts, setFilteredProducts] = useState(productosinicial);
-    const location = useLocation();
-
-    useEffect(() => {
-        const params = new URLSearchParams(location.search);
-        const category = params.get('category');
-        if (category) {
-            setFilteredProducts(productos.filter(producto => producto.categoria === category));
-        } else {
-            setFilteredProducts(productos);
-        }
-    }, [location.search, productos]);
 
     useEffect(() => {
         const productosLocalStorage = JSON.parse(localStorage.getItem('productos'));
@@ -121,20 +109,23 @@ export function Home() {
                     </p>
                     <Link to="/CompraProducto" className="link-compra">Comprar Productos</Link>
                     <div className="row">
-                        {filteredProducts.map(producto => (
-                            <div key={producto.id} className="col-12 col-md-6 col-lg-4">
-                                <div className="card">
-                                    <img src={producto.imagen} className="card-img-top" alt="..." />
-                                    <div className="card-body">
-                                        <h5 className="card-title">{producto.nombre}</h5>
-                                        <p className="card-text">{producto.descripcion}</p>
-                                        <p className="card-text">Precio: ${producto.precio}</p>
-                                        <p className="card-text">Stock: {producto.stock}</p>
+                        {productos.length > 0 ? (
+                            productos.map((producto) => (
+                                <div className="col-md-3 mb-3" key={producto.id}>
+                                    <div className="card">
+                                        <img src={producto.imagen} alt={producto.nombre} className="card-img-top imagen" />
+                                        <div className="card-body">
+                                            <h5 className="card-title">{producto.nombre}</h5>
+                                            <p className="card-text">${producto.precio.toLocaleString()}</p>
+                                            <p className="card-text">{producto.descripcion}</p>
+                                            <p className="card-text">Cantidad de Stock: {producto.stock}</p>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        ))}
-
+                            ))
+                        ) : (
+                            <p>No hay productos en el localStorage</p>
+                        )}
                     </div>
                 </div>
             </section>
@@ -167,3 +158,87 @@ export function Home() {
 }
 
 export default Home;
+
+
+
+
+
+
+
+
+-----------------------------------------------------------------------------------------------------------------
+import React, { useEffect, useState } from "react";
+import '../assets/css/Main.css';
+import { v4 as uuidv4 } from 'uuid';
+import { Link, useLocation } from 'react-router-dom';
+import { Carousel } from './carrusel';
+
+const productosinicial = [
+    { id: uuidv4(), imagen: 'img/OIP.jpeg', nombre: 'MARIO BROSS', precio: 20000, descripcion: "Clásico juego de plataformas y aventuras.", stock: 120, categoria: 'Plataformas' },
+    { id: uuidv4(), imagen: 'img/fortnite.jpg', nombre: 'FORTNITE', precio: 10000, descripcion: "Popular juego de disparos y construcción.", stock: 120, categoria: 'Battle Royale' },
+    { id: uuidv4(), imagen: 'img/zelda.jpeg', nombre: 'ZELDA', precio: 10000, descripcion: "Épico juego de aventuras y exploración.", stock: 120, categoria: 'Aventura' },
+    { id: uuidv4(), imagen: 'img/freefire.jpeg', nombre: 'FREE FIRE', precio: 5000, descripcion: "Juego de disparos y supervivencia.", stock: 120, categoria: 'Battle Royale' },
+    { id: uuidv4(), imagen: 'img/pacman.jpeg', nombre: 'PACMAN', precio: 80000, descripcion: "Clásico juego arcade de laberintos.", stock: 120, categoria: 'Arcade' },
+    { id: uuidv4(), imagen: 'img/metalslug.jpeg', nombre: 'METAL SLUG', precio: 90000, descripcion: "Intenso juego de disparos en 2D.", stock: 120, categoria: 'Acción' },
+    { id: uuidv4(), imagen: 'img/duck.jpeg', nombre: 'DUCK HUNT', precio: 11000, descripcion: "Juego de caza con pistola de luz.", stock: 120, categoria: 'Tiro' },
+    { id: uuidv4(), imagen: 'img/donkeykong.jpeg', nombre: 'DONKEY KONG', precio: 6000, descripcion: "Clásico juego de plataformas y aventuras.", stock: 120, categoria: 'Plataformas' },
+    { id: uuidv4(), imagen: 'img/contra.jpeg', nombre: 'CONTRA', precio: 30000, descripcion: "Acción y disparos en un clásico 2D.", stock: 120, categoria: 'Acción' },
+    { id: uuidv4(), imagen: 'img/crash.png', nombre: 'CRASH', precio: 40000, descripcion: "Juego de plataformas con un divertido personaje.", stock: 120, categoria: 'Plataformas' }
+];
+
+function Home() {
+    const [productos, setProductos] = useState(productosinicial);
+    const [filteredProducts, setFilteredProducts] = useState(productosinicial);
+    const location = useLocation();
+
+    useEffect(() => {
+        const params = new URLSearchParams(location.search);
+        const category = params.get('category');
+        if (category) {
+            setFilteredProducts(productos.filter(producto => producto.categoria === category));
+        } else {
+            setFilteredProducts(productos);
+        }
+    }, [location.search, productos]);
+
+    return (
+        <div>
+            <Carousel />
+            <section className="text-center container py-5">
+                <h4 className="mt-4 mb-5"><strong>Productos más vendidos</strong></h4>
+                <div className="row">
+                    {filteredProducts.map(producto => (
+                        <div className="col-lg-3 col-md-12 mb-4" key={producto.id}>
+                            <div className="card">
+                                <div className="bg-image hover-zoom ripple" data-mdb-ripple-color="light">
+                                    <img src={producto.imagen} className="w-100" alt={producto.nombre} />
+                                    <a href="#!">
+                                        <div className="mask">
+                                            <div className="d-flex justify-content-start align-items-end h-100">
+                                                <h5><span className="badge bg-primary ms-2">Nuevo</span></h5>
+                                            </div>
+                                        </div>
+                                        <div className="hover-overlay">
+                                            <div className="mask" style={{ backgroundColor: "rgba(251, 251, 251, 0.15)" }}></div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div className="card-body">
+                                    <a href="" className="text-reset">
+                                        <h5 className="card-title mb-3">{producto.nombre}</h5>
+                                    </a>
+                                    <p>{producto.descripcion}</p>
+                                    <h6 className="mb-3">${producto.precio}</h6>
+                                    <Link to={`/detalle/${producto.id}`} className="btn btn-primary">Ver más</Link>
+                                </div>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </section>
+        </div>
+    );
+}
+
+export default Home;
+
