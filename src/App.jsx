@@ -11,9 +11,11 @@ import EliminarProducto from './EliminarProducto/EliminarProducto';
 import ModificarProducto from './ModificarProducto/ModificarProducto';
 import Politicas from './Politicas/Politicas';
 import ComprarProducto from './CompraProducto/CompraProducto';
+import Mapa from './CompraProducto/Mapa';
 import DetalleVenta from './DetalleVenta/DetalleVenta';
 import MisCompras from './DetalleVenta/MisCompras';
 import Profile from './Profile/Profile';
+import Description from './Description/Description';
 function App() {
     const { isLoading } = useAuth0();
 
@@ -39,6 +41,9 @@ function App() {
                 <Route path="/CompraProducto" element={<ComprarProducto />} />
                 <Route path="/DetalleVenta" element={<DetalleVenta />} />
                 <Route path="/MisCompras" element={<MisCompras />} />
+                <Route path="/Description" element={<Description />} />
+
+                <Route path="/mapa" element={<Mapa />} />
                 <Route path="/categoria/plataformas" element={<Home category="plataformas" />} />
                 <Route path="/categoria/battle-royale" element={<Home category="battle-royale" />} />
                 <Route path="/categoria/aventura" element={<Home category="aventura" />} />

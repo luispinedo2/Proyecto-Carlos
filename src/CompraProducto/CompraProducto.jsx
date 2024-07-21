@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useAuth0 } from '@auth0/auth0-react';
 import { v4 as uuidv4 } from 'uuid';
 import { CarritoItem } from "./CarritoItem"; // Ajusta esta importación según sea necesario
-import { Link, useLocation } from 'react-router-dom';
+
 import ConfirmDialog from './confirm'; // Ajusta esta importación según sea necesario
 
 export function CompraProducto() {
@@ -149,11 +149,14 @@ export function CompraProducto() {
                 <nav className="navbar-dark ">
                     <div className="container-fluid">
                         <div className="navbar-carrito">
+                            <div></div>
+                            {/* 
                             <Link to="/Ubicacion" className="title-nav_lateral-ubicacion">
                                 <i className="bi bi-geo-alt">
                                 </i>
                                 Ingresa tu ubicación
                             </Link>
+                            */}
                             <button className="carrito_compras-btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation">
                                 <i className="bi bi-cart"></i>
                             </button>
@@ -213,6 +216,7 @@ export function CompraProducto() {
                     <h1 className="subtitulo">Productos Disponibles</h1>
                     <div className="row">
                         {productos.map(item => (
+
                             <CarritoItem key={item.id} item={item} onBuy={agregarProducto} stock={item.stock} />
                         ))}
                         {productos.length === 0 && <p className="stock">No hay productos disponibles</p>}

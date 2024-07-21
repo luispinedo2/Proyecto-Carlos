@@ -1,9 +1,9 @@
+// src/components/Home.js
 import React, { useEffect, useState } from "react";
 import '../assets/css/Main.css';
 import { v4 as uuidv4 } from 'uuid';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Carousel } from './carrusel';
-
 
 const productosinicial = [
     { id: uuidv4(), imagen: 'img/OIP.jpeg', nombre: 'MARIO BROSS', precio: 20000, descripcion: "Clásico juego de plataformas y aventuras.", stock: 120, categoria: 'Plataformas' },
@@ -36,11 +36,10 @@ const productosinicial = [
 ];
 
 export function Home() {
-
-
     const [productos, setProductos] = useState(productosinicial);
     const [filteredProducts, setFilteredProducts] = useState(productosinicial);
     const location = useLocation();
+    const navigate = useNavigate();
 
     useEffect(() => {
         const params = new URLSearchParams(location.search);
@@ -61,10 +60,7 @@ export function Home() {
 
     useEffect(() => {
         localStorage.setItem('productos', JSON.stringify(productos));
-    }
-        , [productos]);
-
-
+    }, [productos]);
 
     const [showScroll, setShowScroll] = useState(false);
 
@@ -87,8 +83,9 @@ export function Home() {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     };
 
-
-
+    const handleProductClick = (producto) => {
+        navigate('/description', { state: { producto } });
+    };
 
     return (
         <div className="container-home">
@@ -113,31 +110,26 @@ export function Home() {
                 </p>
             </article>
             <section className="productos">
-                {/*mostrar los productos que se encuentran en el local storage*/}
-                <div className="">
+                <div className="container mt-4">
                     <h1 className="titulo-productos">Productos Disponibles</h1>
                     <p className="text-compra">Si desea comprar ir al siguiente enlace
                         <i className="bi bi-arrow-down"></i>
                     </p>
-                    <Link to="/CompraProducto" className="link-compra">Comprar Productos</Link>
-                    <div className="productos-category">
+                    <Link to="/compraProducto" className="link-compra">Comprar Productos</Link>
+                    <div className="row">
                         {filteredProducts.map(producto => (
-                            <div key={producto.id} className="">
-                                <p>
-                                    {producto.categoria}
-                                </p>
+                            <div key={producto.id} className="col-md-3 mb-3" onClick={() => handleProductClick(producto)}>
                                 <div className="card">
                                     <img src={producto.imagen} className="card-img-top" alt="..." />
                                     <div className="card-body">
                                         <h5 className="card-title">{producto.nombre}</h5>
-                                        <p className="card-text">{producto.descripcion}</p>
                                         <p className="card-text">Precio: ${producto.precio}</p>
-                                        <p className="card-text">Stock: {producto.stock}</p>
+                                        {/* <p className="card-text">{producto.descripcion}</p>
+                                        <p className="card-text">Stock: {producto.stock}</p> */}
                                     </div>
                                 </div>
                             </div>
                         ))}
-
                     </div>
                 </div>
             </section>
@@ -164,8 +156,7 @@ export function Home() {
             <div className={`scroll-up-btn ${showScroll ? 'show' : ''}`} onClick={scrollUp}>
                 <i className="bi bi-arrow-up-short"></i>
             </div>
-        </div >
-
+        </div>
     );
 }
 
