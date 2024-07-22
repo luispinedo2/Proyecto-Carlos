@@ -59,9 +59,6 @@ export function Home() {
         }
     }, []);
 
-    useEffect(() => {
-        localStorage.setItem('productos', JSON.stringify(productos));
-    }, [productos]);
 
     const [showScroll, setShowScroll] = useState(false);
 
@@ -114,7 +111,7 @@ export function Home() {
                 </p>
             </article>
             <section className="productos">
-                <div className="productos-card">
+                <div className={`container ${category ? 'container' : 'productos-card'}`}>
                     <h1 className="titulo-productos">Productos Disponibles</h1>
                     <p className="text-compra">Si desea comprar ir al siguiente enlace
                         <i className="bi bi-arrow-down"></i>
@@ -140,7 +137,7 @@ export function Home() {
                         ))}
                     </div>
                 </div>
-            </section>
+            </section >
             <section className="noticias">
                 <h2 className="titulo-noticias">Noticias</h2>
                 <span className="subtitulo-noticias">
@@ -164,7 +161,7 @@ export function Home() {
             <div className={`scroll-up-btn ${showScroll ? 'show' : ''}`} onClick={scrollUp}>
                 <i className="bi bi-arrow-up-short"></i>
             </div>
-        </div>
+        </div >
     );
 }
 
