@@ -2,9 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useAuth0 } from '@auth0/auth0-react';
 import { v4 as uuidv4 } from 'uuid';
 import { CarritoItem } from "./CarritoItem"; // Ajusta esta importación según sea necesario
-import { Login } from '../Login/Login'; // Ajusta esta importación según sea necesario
-import { Logout } from '../Logout/Logout'; // Ajusta esta importación según sea necesario
-import { Profile } from '../Profile/Profile'; // Ajusta esta importación según sea necesario
+
 import ConfirmDialog from './confirm'; // Ajusta esta importación según sea necesario
 
 export function CompraProducto() {
@@ -13,7 +11,6 @@ export function CompraProducto() {
     const [carrito, setCarrito] = useState(JSON.parse(localStorage.getItem('carrito')) || []);
     const [total, setTotal] = useState(JSON.parse(localStorage.getItem('total')) || 0);
     const [mensaje, setMensaje] = useState("");
-    const [fecha, setFecha] = useState(new Date().toLocaleDateString());
     const [compras, setCompras] = useState(JSON.parse(localStorage.getItem('compras')) || []);
     const [mostrarConfirmacion, setMostrarConfirmacion] = useState(false);
 
@@ -26,12 +23,11 @@ export function CompraProducto() {
     }, []);
 
     useEffect(() => {
-        localStorage.setItem("fecha", JSON.stringify(fecha));
+
         localStorage.setItem("carrito", JSON.stringify(carrito));
         localStorage.setItem("total", JSON.stringify(total));
-        localStorage.setItem("productos", JSON.stringify(productos));
         localStorage.setItem("compras", JSON.stringify(compras));
-    }, [carrito, total, fecha, productos, compras]);
+    }, [carrito, total, compras]);
 
     const eliminarProducto = (id) => {
         const productoEnCarrito = carrito.find(item => item.id === id);
@@ -65,20 +61,28 @@ export function CompraProducto() {
         }
     };
 
-
     useEffect(() => {
         const timer = setTimeout(() => {
             setMensaje("");
-        }, 5000);
+        }, 8000);
         return () => clearTimeout(timer);
     }, [mensaje]);
+
     const comprar = () => {
+        if (!isAuthenticated) {
+            setMensaje("Para realizar una compra, debes iniciar sesión.");
+
+            loginWithRedirect();
+            return;
+        }
+
         if (carrito.length === 0) {
             setMensaje("El carrito está vacío");
             return;
         }
         setMostrarConfirmacion(true); // Mostrar el cuadro de diálogo de confirmación
     };
+
     const confirmarCompra = () => {
         const nuevosProductos = productos.map(producto => {
             const productoEnCarrito = carrito.find(item => item.id === producto.id);
@@ -98,6 +102,7 @@ export function CompraProducto() {
         setTotal(0);
         setMostrarConfirmacion(false); // Ocultar el cuadro de diálogo de confirmación
     };
+
     const cancelarCompra = () => {
         setMostrarConfirmacion(false); // Ocultar el cuadro de diálogo de confirmación
     };
@@ -113,7 +118,6 @@ export function CompraProducto() {
         setCompras(nuevasCompras);
         localStorage.setItem('compras', JSON.stringify(nuevasCompras));
     };
-
 
     const [showScroll, setShowScroll] = useState(false);
 
@@ -137,71 +141,92 @@ export function CompraProducto() {
     };
 
 
-    // Autenticación
-    if (isLoading) {
-        return <div>Loading...</div>;
-    }
-
-    if (!isAuthenticated) {
-        return (
-            <div>
-                <h2>Para realizar una compra, debes iniciar sesión.</h2>
-                <Login />
-            </div>
-        );
-    }
 
     return (
-        <div>
-            <header>
-                <h1>Compra Producto</h1>
-                <Profile />
-                <Logout />
-            </header>
-            <div className="row">
-                <div className="col-8 productos">
+        <div className="containerProductos" >
+            <div className="">
+                <nav className="navbar-dark ">
+                    <div className="container-fluid">
+                        <div className="navbar-carrito">
+                            <div></div>
+                            {/* 
+                            <Link to="/Ubicacion" className="title-nav_lateral-ubicacion">
+                                <i className="bi bi-geo-alt">
+                                </i>
+                                Ingresa tu ubicación
+                            </Link>
+                            */}
+                            <button className="carrito_compras-btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation">
+                                <i className="bi bi-cart"></i>
+                            </button>
+                        </div>
+                        <div className="offcanvas offcanvas-end text-bg-dark" tabIndex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
+                            <div className="offcanvas-header">
+                                <button type="button" className="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+
+                            </div>
+                            <h1 className="subtitulo__carrito">Carrito de Compras</h1>
+                            <div className="carrito">
+                                <div className="contentCarrito">
+                                    <ul className="list-group">
+                                        {carrito.map(item => (
+                                            <li key={item.id} className="list-group-item productosCarrito">
+                                                <img src={item.imagen} alt={item.nombre} className="carrito-item-imagen" />
+                                                {item.nombre} <br />Cantidad: {item.cantidad} <br /> Precio : ${item.precio.toLocaleString()}
+                                                <button className="btn btn-danger__comprar" onClick={() => eliminarProducto(item.id)}>
+                                                    {item.cantidad > 1 ? "Restar" : "Eliminar"}
+                                                </button>
+                                            </li>
+                                        ))}
+                                    </ul>
+
+                                </div>
+
+                                {/*if mensaje de confirmacion es true, mostrar un icono de  wraning*/}
+                                {mensaje && (
+                                    <div className="mensaje" role="alert">
+                                        <i className="bi bi-exclamation-triangle-fill"></i>
+                                        {mensaje}
+
+                                    </div>
+                                )}
+
+                                <h3 className="total">Total: ${total.toLocaleString()}</h3>
+                                <button className="btn btn-success__comprar" onClick={comprar}>
+                                    Comprar
+                                </button>
+
+                            </div>
+                            {mostrarConfirmacion && (
+                                <ConfirmDialog
+                                    mensaje="¿Está seguro de que desea confirmar la compra?"
+                                    onConfirm={confirmarCompra}
+                                    onCancel={cancelarCompra}
+                                />
+                            )}
+                        </div>
+                    </div>
+                    <div className={`scroll-up-btn ${showScroll ? 'show' : ''}`} onClick={scrollUp}>
+                        <i className="bi bi-arrow-up-short"></i>
+                    </div>
+                </nav>
+
+                <div className="productos-card">
                     <h1 className="subtitulo">Productos Disponibles</h1>
                     <div className="row">
                         {productos.map(item => (
+
                             <CarritoItem key={item.id} item={item} onBuy={agregarProducto} stock={item.stock} />
                         ))}
                         {productos.length === 0 && <p className="stock">No hay productos disponibles</p>}
                     </div>
                 </div>
-                <div className="carrito col-4">
-                    <h1 className="subtitulo">Carrito de Compras</h1>
-                    <div className="contentCarrito">
-                        <ul className="list-group">
-                            {carrito.map(item => (
-                                <li key={item.id} className="list-group-item productosCarrito">
-                                    <img src={item.imagen} alt={item.nombre} className="carrito-item-imagen" />
-                                    {item.nombre} - ${item.precio.toLocaleString()} x {item.cantidad}
-                                    <button className="btn btn-danger" onClick={() => eliminarProducto(item.id)}>Eliminar</button>
-                                </li>
-                            ))}
-                        </ul>
-                        <h3 className="total">Total: ${total.toLocaleString()}</h3>
-                        <button className="btn btn-success" onClick={comprar}>
-                            Comprar
-                        </button>
-                        <h3 className="mensaje">{mensaje}</h3>
-                    </div>
-                </div>
-            </div>
-
-            {mostrarConfirmacion && (
-                <ConfirmDialog
-                    mensaje="¿Está seguro de que desea confirmar la compra?"
-                    onConfirm={confirmarCompra}
-                    onCancel={cancelarCompra}
-                />
-            )}
-
-            <div className={`scroll-up-btn ${showScroll ? 'show' : ''}`} onClick={scrollUp}>
-                <i className="bi bi-arrow-up-short"></i>
             </div>
         </div>
     );
+
+
+
 }
 
 export default CompraProducto;

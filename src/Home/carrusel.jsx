@@ -7,20 +7,23 @@ export const Carousel = () => {
         {
             src: 'img/freefire.jpeg',
             alt: 'First slide',
+            /*
             caption: 'Aventuras en Free Fire',
-            description: 'Vive la emoción de la supervivencia y la estrategia.',
+            description: 'Vive la emoción de la supervivencia y la estrategia.',*/
         },
         {
             src: 'img/fortnite.jpg',
             alt: 'Second slide',
+            /*
             caption: 'Batalla Royale de Fortnite',
-            description: 'Únete a la batalla en el mundo de Fortnite.',
+            description: 'Únete a la batalla en el mundo de Fortnite.',*/
         },
         {
             src: 'img/zelda.jpeg',
             alt: 'Third slide',
+            /*
             caption: 'Aventuras de Zelda',
-            description: 'Explora el mundo mágico de Zelda y sus misterios.',
+            description: 'Explora el mundo mágico de Zelda y sus misterios.',*/
         },
     ];
 

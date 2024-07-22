@@ -1,8 +1,7 @@
 
 import React, { useEffect, useState } from "react";
-import '../assets/css/Main.css';
 
-export function DetalleVenta() {
+export function MisCompras() {
     // Estado para almacenar las ventas
     const [ventas, setVentas] = useState([]);
     //esto es para guardar la venta seleccionada
@@ -19,7 +18,6 @@ export function DetalleVenta() {
         //se muestra la venta seleccionada
         setVentaSeleccionada(venta);
     };
-    /*
     // Función para anular una venta
     const anularVenta = (id) => {
         //se filtra la venta seleccionada el filter devuelve un nuevo array con las ventas que no sean la seleccionada
@@ -29,7 +27,7 @@ export function DetalleVenta() {
         localStorage.setItem('compras', JSON.stringify(nuevasVentas));
         //se muestra el mensaje de anulación
         setVentaSeleccionada(null);
-        setMensaje("Venta anulada con éxito.");
+        setMensaje("Eliminación exitosa.");
         //devolver la cantidad al stock del producto anulado
         const productos = JSON.parse(localStorage.getItem('productos')) || [];
         //se busca la venta anulada
@@ -49,7 +47,7 @@ export function DetalleVenta() {
             setMensaje("");
         }, 5000);
     };
-*/
+
 
     const [showScroll, setShowScroll] = useState(false);
 
@@ -75,26 +73,27 @@ export function DetalleVenta() {
     return (
         <div className="content-ventas">
             <div>
-                <header className="card-title titulo">Listado de Ventas</header>
+                <header className="card-title titulo">Listado de Compras</header>
             </div>
             <div className="row">
                 <div className="col-8 mt-4 ventas">
-                    <h1 className="subtitulo-ventas">Ventas Realizadas</h1>
+                    <h1 className="subtitulo-ventas">Compras Realizadas</h1>
                     <ul className="list-group">
                         {ventas.map(venta => (
                             <li key={venta.id} className="list-group-item ventasItem">
-                                Código: {venta.id} <br /> Fecha: {venta.fecha.toLocaleString()}
-                                <button className="btn btn-info" onClick={() => seleccionarVenta(venta)}>Ver Detalle</button>
+                                {venta.id} <br />
+                                Fecha de la compra: {venta.fecha.toLocaleString()}
+                                <button className="btn btn-info" onClick={() => seleccionarVenta(venta)}>Ver Detalles de la Compra</button>
                             </li>
                         ))}
-                        {ventas.length === 0 && <p className="registro-ventas">No hay ventas registradas</p>}
+                        {ventas.length === 0 && <p className="registro-ventas">No hay Compras registradas</p>}
                     </ul>
                 </div>
                 <div className="col-4 detalle-venta">
                     {/*las && se utilizan para mostrar el contenido si la condición es verdadera*/}
                     {ventaSeleccionada && (
                         <>
-                            <h2 className="subtitulo-detalle">Detalle de la Venta</h2>
+                            <h2 className="subtitulo-detalle">Detalle de la Compra</h2>
                             <ul className="list-group">
                                 {ventaSeleccionada.productos.map((producto, index) => (
                                     <li key={index} className="list-group-item detalleItem">
@@ -104,13 +103,11 @@ export function DetalleVenta() {
                             </ul>
                             <h3 className="Total-detalle">Total: ${ventaSeleccionada.total.toLocaleString()}</h3>
                             <h4 className="Fecha-detalle">Fecha: {ventaSeleccionada.fecha.toLocaleString()}</h4>
-                            {/*
-                            <button className="btn btn-danger  btn-danger-detalle" onClick={() => anularVenta(ventaSeleccionada.id)}>Anular Venta</button>
-                            */}
+                            <button className="btn btn-danger  btn-danger-detalle" onClick={() => anularVenta(ventaSeleccionada.id)}>Borrar del historial</button>
+
                         </>
                     )}
-                    {/*mostrar mensaje de anulación*
-                    {mensaje && <h3 className="mensajeAnular">{mensaje}</h3>}*/}
+                    {mensaje && <h3 className="mensajeAnular">{mensaje}</h3>}
                 </div>
             </div>
 
@@ -120,4 +117,4 @@ export function DetalleVenta() {
         </div>
     );
 }
-export default DetalleVenta;
+export default MisCompras;

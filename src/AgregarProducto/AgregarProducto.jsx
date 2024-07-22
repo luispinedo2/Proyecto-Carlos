@@ -8,6 +8,7 @@ export function AgregarNuevoProducto() {
     const nombreProducto = useRef(null);
     const precioProducto = useRef(null);
     const descripcionProducto = useRef(null);
+    const categoriaProducto = useRef(null);
     const stockProducto = useRef(null);
     const imagenProducto = useRef(null);
 
@@ -29,9 +30,10 @@ export function AgregarNuevoProducto() {
         const nombre = nombreProducto.current.value;
         const precio = precioProducto.current.value;
         const descripcion = descripcionProducto.current.value;
+        const categoria = categoriaProducto.current.value;
         const stock = stockProducto.current.value;
 
-        if (nombre === "" || precio === "" || descripcion === "" || stock === "" || !imagen) {
+        if (nombre === "" || precio === "" || descripcion === "" || categoria === "" || stock === "" || !imagen) {
             alert("Todos los campos son obligatorios");
             return;
         }
@@ -41,6 +43,7 @@ export function AgregarNuevoProducto() {
             nombre,
             precio: Number(precio),
             descripcion,
+            categoria,
             stock: Number(stock),
             imagen
         };
@@ -58,6 +61,7 @@ export function AgregarNuevoProducto() {
         nombreProducto.current.value = "";
         precioProducto.current.value = "";
         descripcionProducto.current.value = "";
+        categoriaProducto.current.value = "";
         stockProducto.current.value = "";
         imagenProducto.current.value = null;
         setImagen(null);
@@ -71,6 +75,7 @@ export function AgregarNuevoProducto() {
                     <input type="text" className="form-control" ref={nombreProducto} placeholder="Ingrese el nombre del producto" />
                     <input type="number" className="form-control" ref={precioProducto} min={1} placeholder="Ingrese el precio" />
                     <input type="text" className="form-control" ref={descripcionProducto} placeholder="Ingrese la descripción" />
+                    <input type="text" className="form-control" ref={categoriaProducto} placeholder="Ingrese la categoría" />
                     <input type="number" className="form-control" ref={stockProducto} min={1} placeholder="Ingrese la cantidad" />
                     <input type="file" className="form-control" ref={imagenProducto} onChange={guardarImagen} />
                     <button type="button" className="btn-agregar btn-success" onClick={agregarProductoNuevo}>
