@@ -16,6 +16,7 @@ import DetalleVenta from './DetalleVenta/DetalleVenta';
 import MisCompras from './DetalleVenta/MisCompras';
 import Profile from './Profile/Profile';
 import Description from './Description/Description';
+import BuscarProducto from './Navbar/BuscarProducto';
 function App() {
     const { isLoading } = useAuth0();
 
@@ -42,7 +43,7 @@ function App() {
                 <Route path="/DetalleVenta" element={<DetalleVenta />} />
                 <Route path="/MisCompras" element={<MisCompras />} />
                 <Route path="/Description" element={<Description />} />
-
+                <Route path="/search" element={<BuscarProducto />} />
                 <Route path="/mapa" element={<Mapa />} />
                 <Route path="/categoria/plataformas" element={<Home category="plataformas" />} />
                 <Route path="/categoria/battle-royale" element={<Home category="battle-royale" />} />

@@ -110,7 +110,7 @@ export function Home() {
                 </p>
             </article>
             <section className="productos">
-                <div className="container mt-4">
+                <div className="container mt-4 ">
                     <h1 className="titulo-productos">Productos Disponibles</h1>
                     <p className="text-compra">Si desea comprar ir al siguiente enlace
                         <i className="bi bi-arrow-down"></i>
@@ -119,6 +119,7 @@ export function Home() {
                     <div className="row">
                         {filteredProducts.map(producto => (
                             <div key={producto.id} className="col-md-3 mb-3" onClick={() => handleProductClick(producto)}>
+                                {/*col-md-6 mb-5 hacer una condicional por si esta en categoria colocarle a las card una medida diferente*/}
                                 <div className="card">
                                     <img src={producto.imagen} className="card-img-top" alt="..." />
                                     <div className="card-body">

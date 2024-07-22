@@ -7,6 +7,8 @@ function NavBar2() {
     const location = useLocation(); // Obtiene la ubicación actual de la aplicación
     const navigate = useNavigate();
     const { user, isAuthenticated, logout, loginWithRedirect } = useAuth0(); // Obtiene información del usuario y métodos de autenticación de Auth0
+    const [searchTerm, setSearchTerm] = useState('');
+
 
     // Función para aplicar clase activa a los enlaces
     const isActive = (path) => {
@@ -22,12 +24,20 @@ function NavBar2() {
     const [liked, setLiked] = useState(false); // Define el estado "liked" para manejar el estado del botón "me encanta"
 
     // Función para manejar el click en el botón de me encanta
-    const handleClick = () => {
+    const clickReaccion = () => {
         setLiked(!liked); // Invierte el estado de "liked"
     }
 
-    const handleCategoryClick = (category) => {
+    const BuscarCategoria = (category) => {
         navigate(`/?category=${category}`);
+    };
+
+
+    const BuscarProducto = (e) => {
+        e.preventDefault();
+        if (searchTerm.trim() !== '') {
+            navigate(`/search?query=${searchTerm}`);
+        }
     };
 
     return (
@@ -54,26 +64,27 @@ function NavBar2() {
                         </button>
                         <ul className="dropdown-menu menu-category" aria-labelledby="dropdownMenuButton">
 
-                            <li><span className="dropdown-item category-item" onClick={() => handleCategoryClick('Plataformas')}>Plataformas</span></li>
-                            <li><span className="dropdown-item category-item" onClick={() => handleCategoryClick('Battle Royale')}>Battle Royale</span></li>
-                            <li><span className="dropdown-item category-item" onClick={() => handleCategoryClick('Aventura')}>Aventura</span></li>
-                            <li><span className="dropdown-item category-item" onClick={() => handleCategoryClick('Arcade')}>Arcade</span></li>
-                            <li><span className="dropdown-item category-item" onClick={() => handleCategoryClick('Acción')}>Acción</span></li>
-                            <li><span className="dropdown-item category-item" onClick={() => handleCategoryClick('Tiro')}>Tiro</span></li>
-                            <li><span className="dropdown-item category-item" onClick={() => handleCategoryClick('FPS')}>FPS</span></li>
-                            <li><span className="dropdown-item category-item" onClick={() => handleCategoryClick('TPS')}>TPS</span></li>
-                            <li><span className="dropdown-item category-item" onClick={() => handleCategoryClick('Supervivencia')}>Supervivencia</span></li>
-                            <li><span className="dropdown-item category-item" onClick={() => handleCategoryClick('Terror')}>Terror</span></li>
-                            <li><span className="dropdown-item category-item" onClick={() => handleCategoryClick('Deportes')}>Deportes</span></li>
-                            <li><span className="dropdown-item category-item" onClick={() => handleCategoryClick('Lucha')}>Lucha</span></li>
+                            <li><span className="dropdown-item category-item" onClick={() => BuscarCategoria('Plataformas')}>Plataformas</span></li>
+                            <li><span className="dropdown-item category-item" onClick={() => BuscarCategoria('Battle Royale')}>Battle Royale</span></li>
+                            <li><span className="dropdown-item category-item" onClick={() => BuscarCategoria('Aventura')}>Aventura</span></li>
+                            <li><span className="dropdown-item category-item" onClick={() => BuscarCategoria('Arcade')}>Arcade</span></li>
+                            <li><span className="dropdown-item category-item" onClick={() => BuscarCategoria('Acción')}>Acción</span></li>
+                            <li><span className="dropdown-item category-item" onClick={() => BuscarCategoria('Tiro')}>Tiro</span></li>
+                            <li><span className="dropdown-item category-item" onClick={() => BuscarCategoria('FPS')}>FPS</span></li>
+                            <li><span className="dropdown-item category-item" onClick={() => BuscarCategoria('TPS')}>TPS</span></li>
+                            <li><span className="dropdown-item category-item" onClick={() => BuscarCategoria('Supervivencia')}>Supervivencia</span></li>
+                            <li><span className="dropdown-item category-item" onClick={() => BuscarCategoria('Terror')}>Terror</span></li>
+                            <li><span className="dropdown-item category-item" onClick={() => BuscarCategoria('Deportes')}>Deportes</span></li>
+                            <li><span className="dropdown-item category-item" onClick={() => BuscarCategoria('Lucha')}>Lucha</span></li>
                         </ul>
                     </div>
                 </div>
 
                 {/* Formulario de búsqueda de productos */}
-                <form className="">
+                <form className="" onSubmit={BuscarProducto}>
                     <div className='container-form'>
-                        <input className="input-search" type="search" placeholder="Buscar productos" aria-label="Search" /> {/* Campo de búsqueda */}
+                        <input className="input-search" type="search" placeholder="Buscar productos" aria-label="Search"
+                            value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} /> {/* Campo de búsqueda */}
                         <button className="btn-search" type="submit">
                             <i className="bi bi-search"></i> {/* Icono de búsqueda */}
                         </button>
@@ -92,7 +103,7 @@ function NavBar2() {
 
                 {/* Botón "me encanta" */}
                 <div className="container-reaccion">
-                    <button className="btn__encanta" onClick={handleClick}>
+                    <button className="btn__encanta" onClick={clickReaccion}>
                         <i className={`bi ${liked ? 'bi-heart-fill' : 'bi-heart'} ${liked ? 'heart-animate' : ''}`}></i> {/* Icono de corazón */}
                     </button>
                 </div>
