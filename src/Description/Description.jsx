@@ -17,7 +17,9 @@ const Description = () => {
 
     return (
         <section>
-            <Link to={returnPath} className="back-link">Volver</Link>
+            <Link to={returnPath} className="back-link">
+                <i className="bi bi-arrow-left-circle"></i>
+            </Link>
             <div className="description-container">
                 <img src={details.imagen} alt={details.nombre} className="description-image" />
                 <div className="description-details">

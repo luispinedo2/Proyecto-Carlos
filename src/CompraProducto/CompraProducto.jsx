@@ -11,7 +11,6 @@ export function CompraProducto() {
     const [carrito, setCarrito] = useState(JSON.parse(localStorage.getItem('carrito')) || []);
     const [total, setTotal] = useState(JSON.parse(localStorage.getItem('total')) || 0);
     const [mensaje, setMensaje] = useState("");
-    const [fecha, setFecha] = useState(new Date().toLocaleDateString());
     const [compras, setCompras] = useState(JSON.parse(localStorage.getItem('compras')) || []);
     const [mostrarConfirmacion, setMostrarConfirmacion] = useState(false);
 
@@ -24,11 +23,11 @@ export function CompraProducto() {
     }, []);
 
     useEffect(() => {
-        localStorage.setItem("fecha", JSON.stringify(fecha));
+
         localStorage.setItem("carrito", JSON.stringify(carrito));
         localStorage.setItem("total", JSON.stringify(total));
         localStorage.setItem("compras", JSON.stringify(compras));
-    }, [carrito, total, fecha, compras]);
+    }, [carrito, total, compras]);
 
     const eliminarProducto = (id) => {
         const productoEnCarrito = carrito.find(item => item.id === id);

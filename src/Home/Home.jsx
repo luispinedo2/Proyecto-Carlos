@@ -35,6 +35,7 @@ const productosinicial = [
     { id: uuidv4(), imagen: 'img/STREET.jpeg', nombre: 'STREET FIGHTER', precio: 50000, descripcion: "Icónico juego de lucha callejera.", stock: 120, categoria: 'Lucha' },
 ];
 
+
 export function Home() {
     const [productos, setProductos] = useState(productosinicial);
     const [filteredProducts, setFilteredProducts] = useState(productosinicial);
@@ -87,6 +88,9 @@ export function Home() {
         navigate('/description', { state: { producto } });
     };
 
+    const params = new URLSearchParams(location.search);
+    const category = params.get('category');
+
     return (
         <div className="container-home">
             <Carousel />
@@ -110,7 +114,7 @@ export function Home() {
                 </p>
             </article>
             <section className="productos">
-                <div className="container mt-4 ">
+                <div className="productos-card">
                     <h1 className="titulo-productos">Productos Disponibles</h1>
                     <p className="text-compra">Si desea comprar ir al siguiente enlace
                         <i className="bi bi-arrow-down"></i>
@@ -118,15 +122,18 @@ export function Home() {
                     <Link to="/compraProducto" className="link-compra">Comprar Productos</Link>
                     <div className="row">
                         {filteredProducts.map(producto => (
-                            <div key={producto.id} className="col-md-3 mb-3" onClick={() => handleProductClick(producto)}>
-                                {/*col-md-6 mb-5 hacer una condicional por si esta en categoria colocarle a las card una medida diferente*/}
+
+                            <div
+                                key={producto.id}
+                                className={`col-md-${category ? '6' : '3'} mb-3 ${category ? 'card-home' : 'card-default'}`}
+                                /*`col-md-${category ? '6' : '8'} mb-3 `}*/
+                                onClick={() => handleProductClick(producto)}
+                            >
                                 <div className="card">
-                                    <img src={producto.imagen} className="card-img-top" alt="..." />
+                                    <img src={producto.imagen} className="card-img-top" alt={producto.nombre} />
                                     <div className="card-body">
                                         <h5 className="card-title">{producto.nombre}</h5>
                                         <p className="card-text">Precio: ${producto.precio}</p>
-                                        {/* <p className="card-text">{producto.descripcion}</p>
-                                        <p className="card-text">Stock: {producto.stock}</p> */}
                                     </div>
                                 </div>
                             </div>

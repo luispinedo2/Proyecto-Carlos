@@ -46,7 +46,7 @@ function NavBar2() {
                 <Link to="/" className="title-nav_lateral">
 
                     GameVerse
-                    <i class="bi bi-controller"></i></Link> {/* Enlace a la página principal */}
+                    <i className="bi bi-controller"></i></Link> {/* Enlace a la página principal */}
 
                 {/* Categorías de productos */}
                 <div className="d-block container-category">
