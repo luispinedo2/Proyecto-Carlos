@@ -1,25 +1,30 @@
 import React, { useState, useEffect } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
+
 const Profile = () => {
     const { user, isAuthenticated, loginWithRedirect, isLoading } = useAuth0();
     const [selectedSection, setSelectedSection] = useState("profile");
-    const [darkTheme, setDarkTheme] = useState(false);
 
+    // Efecto para aplicar el tema oscuro basado en el valor almacenado en localStorage
     useEffect(() => {
         const savedTheme = localStorage.getItem("darkTheme");
-        if (savedTheme) {
-            setDarkTheme(JSON.parse(savedTheme));
-        }
-    }, []);
-
-    useEffect(() => {
-        if (darkTheme) {
+        if (savedTheme === "true") {
             document.body.classList.add("dark-theme");
         } else {
             document.body.classList.remove("dark-theme");
         }
-        localStorage.setItem("darkTheme", darkTheme);
-    }, [darkTheme]);
+    }, []);
+
+    // Efecto para guardar el estado del tema oscuro en localStorage
+    const handleThemeChange = (e) => {
+        const isDarkTheme = e.target.checked;
+        if (isDarkTheme) {
+            document.body.classList.add("dark-theme");
+        } else {
+            document.body.classList.remove("dark-theme");
+        }
+        localStorage.setItem("darkTheme", JSON.stringify(isDarkTheme));
+    };
 
     if (isLoading) {
         return <div>Loading...</div>;
@@ -55,8 +60,8 @@ const Profile = () => {
                                 Tema oscuro:
                                 <input
                                     type="checkbox"
-                                    checked={darkTheme}
-                                    onChange={() => setDarkTheme(!darkTheme)}
+                                    onChange={handleThemeChange}
+                                    defaultChecked={localStorage.getItem("darkTheme") === "true"}
                                 />
                             </label>
                         </div>
@@ -100,6 +105,6 @@ const Profile = () => {
             </div>
         </div>
     );
-}
+};
 
 export default Profile;
