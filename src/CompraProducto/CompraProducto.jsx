@@ -4,9 +4,24 @@ import { v4 as uuidv4 } from 'uuid';
 import { CarritoItem } from "./CarritoItem"; // Ajusta esta importación según sea necesario
 
 import ConfirmDialog from './confirm'; // Ajusta esta importación según sea necesario
+// Define la función fuera del componente
+export function agregarProducto(producto, carrito, setCarrito, total, setTotal) {
+    const productoEnCarrito = carrito.find(item => item.id === producto.id);
+    if (productoEnCarrito) {
+        const nuevoCarrito = carrito.map(item =>
+            item.id === producto.id ? { ...item, cantidad: item.cantidad + 1 } : item
+        );
+        setCarrito(nuevoCarrito);
+        setTotal(total + producto.precio);
+    } else {
+        setCarrito([...carrito, { ...producto, cantidad: 1 }]);
+        setTotal(total + producto.precio);
+    }
+}
 
+// Usa la función en el componente
 export function CompraProducto() {
-    const { isLoading, isAuthenticated, loginWithRedirect } = useAuth0();
+    const { isAuthenticated, loginWithRedirect } = useAuth0();
     const [productos, setProductos] = useState([]);
     const [carrito, setCarrito] = useState(JSON.parse(localStorage.getItem('carrito')) || []);
     const [total, setTotal] = useState(JSON.parse(localStorage.getItem('total')) || 0);
@@ -47,31 +62,9 @@ export function CompraProducto() {
         setTotal(nuevoTotal);
     };
 
-    const agregarProducto = (producto) => {
-        const productoEnCarrito = carrito.find(item => item.id === producto.id);
-        if (productoEnCarrito) {
-            const nuevoCarrito = carrito.map(item =>
-                item.id === producto.id ? { ...item, cantidad: item.cantidad + 1 } : item
-            );
-            setCarrito(nuevoCarrito);
-            setTotal(total + producto.precio);
-        } else {
-            setCarrito([...carrito, { ...producto, cantidad: 1 }]);
-            setTotal(total + producto.precio);
-        }
-    };
-
-    useEffect(() => {
-        const timer = setTimeout(() => {
-            setMensaje("");
-        }, 8000);
-        return () => clearTimeout(timer);
-    }, [mensaje]);
-
     const comprar = () => {
         if (!isAuthenticated) {
             setMensaje("Para realizar una compra, debes iniciar sesión.");
-
             loginWithRedirect();
             return;
         }
@@ -140,8 +133,6 @@ export function CompraProducto() {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     };
 
-
-
     return (
         <div className="containerProductos" >
             <div className="">
@@ -149,13 +140,6 @@ export function CompraProducto() {
                     <div className="container-fluid">
                         <div className="navbar-carrito">
                             <div></div>
-                            {/* 
-                            <Link to="/Ubicacion" className="title-nav_lateral-ubicacion">
-                                <i className="bi bi-geo-alt">
-                                </i>
-                                Ingresa tu ubicación
-                            </Link>
-                            */}
                             <button className="carrito_compras-btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation">
                                 <i className="bi bi-cart"></i>
                             </button>
@@ -163,7 +147,6 @@ export function CompraProducto() {
                         <div className="offcanvas offcanvas-end text-bg-dark" tabIndex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
                             <div className="offcanvas-header">
                                 <button type="button" className="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-
                             </div>
                             <h1 className="subtitulo__carrito">Carrito de Compras</h1>
                             <div className="carrito">
@@ -179,23 +162,17 @@ export function CompraProducto() {
                                             </li>
                                         ))}
                                     </ul>
-
                                 </div>
-
-                                {/*if mensaje de confirmacion es true, mostrar un icono de  wraning*/}
                                 {mensaje && (
                                     <div className="mensaje" role="alert">
-                                        <i className="bi bi-exclamation-triangle-fill"></i>
-                                        {mensaje}
 
+                                        {mensaje}
                                     </div>
                                 )}
-
                                 <h3 className="total">Total: ${total.toLocaleString()}</h3>
                                 <button className="btn btn-success__comprar" onClick={comprar}>
                                     Comprar
                                 </button>
-
                             </div>
                             {mostrarConfirmacion && (
                                 <ConfirmDialog
@@ -215,8 +192,7 @@ export function CompraProducto() {
                     <h1 className="subtitulo">Productos Disponibles</h1>
                     <div className="row">
                         {productos.map(item => (
-
-                            <CarritoItem key={item.id} item={item} onBuy={agregarProducto} stock={item.stock} />
+                            <CarritoItem key={item.id} item={item} onBuy={(producto) => agregarProducto(producto, carrito, setCarrito, total, setTotal)} stock={item.stock} />
                         ))}
                         {productos.length === 0 && <p className="stock">No hay productos disponibles</p>}
                     </div>
@@ -224,9 +200,6 @@ export function CompraProducto() {
             </div>
         </div>
     );
-
-
-
 }
 
 export default CompraProducto;

@@ -82,7 +82,7 @@ export function Home() {
     };
 
     const handleProductClick = (producto) => {
-        navigate('/description', { state: { producto } });
+        navigate('/CompraProducto', { state: { producto } });
     };
 
     const params = new URLSearchParams(location.search);
@@ -90,6 +90,9 @@ export function Home() {
 
     return (
         <div className="container-home">
+
+
+
             <Carousel />
 
             <header className="header">
