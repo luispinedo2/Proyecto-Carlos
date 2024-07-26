@@ -41,15 +41,15 @@ function NavBar2() {
     };
 
     return (
-        <nav className="nav-lateral">
-            <div className="container-lateral">
-                <Link to="/" className="title-nav_lateral">
+        <nav className="navbar menu-principal">
+            <div className="container-fluid">
+                <Link to="/" className="title-nav_principal">
 
                     GameVerse
-                    <i className="bi bi-controller"></i></Link> {/* Enlace a la página principal */}
+                    <i className="bi bi-controller"></i></Link>
 
-                {/* Categorías de productos */}
-                <div className="d-block container-category">
+
+                <div className="container-category">
                     <div className="dropdown">
                         <button
                             className="btn btn-category dropdown-toggle"
@@ -81,12 +81,12 @@ function NavBar2() {
                 </div>
 
                 {/* Formulario de búsqueda de productos */}
-                <form className="" onSubmit={BuscarProducto}>
-                    <div className='container-form'>
+                <form className="container-form" onSubmit={BuscarProducto}>
+                    <div className='content-form'>
                         <input className="input-search" type="search" placeholder="Buscar productos" aria-label="Search"
                             value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} /> {/* Campo de búsqueda */}
                         <button className="btn-search" type="submit">
-                            <i className="bi bi-search"></i> {/* Icono de búsqueda */}
+                            <i className="bi bi-search icon-search"></i> {/* Icono de búsqueda */}
                         </button>
                     </div>
                 </form>
@@ -98,7 +98,11 @@ function NavBar2() {
                         Mis Compras
                     </Link>
                 ) : (
-                    <div className='container-compras'></div>
+                    <div className='container-compras'>
+                        <Link to="/about" className="title-nav__compras">
+                            sobre nosotros
+                        </Link>
+                    </div>
                 )}
 
                 {/* Botón "me encanta" */}
@@ -110,79 +114,67 @@ function NavBar2() {
 
                 {/* Autenticación */}
                 {isAuthenticated ? (
-                    <div className="navbar-nav nav-salir">
+                    <div className="nav-cerrarsesion">
                         <button className="btn btn-logout" onClick={() => logout()}>Cerrar Sesión</button> {/* Botón de cerrar sesión */}
                     </div>
                 ) : (
-                    <div className="navbar-nav nav-iniciar">
+                    <div className="nav-iniciarsesion">
                         <button className="btn btn-login" onClick={() => loginWithRedirect()}>Iniciar Sesión</button> {/* Botón de iniciar sesión */}
                     </div>
                 )}
-
-                {/* Botón para abrir menú lateral en dispositivos móviles */}
-                <button className="navbar-toggler icon__list" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
-                    <i className="bi bi-list"></i> {/* Icono de lista */}
+                <button className="navbar-toggler bg-body-tertiary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+                    <span className="navbar-toggler-icon"></span>
                 </button>
                 <div className="offcanvas offcanvas-end" tabIndex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
                     <div className="offcanvas-header">
-                        <button type="button" className="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button> {/* Botón para cerrar el menú lateral */}
+                        <button type="button" className="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                     </div>
-
-
                     <div className="offcanvas-body">
-                        <ul className="navbar-nav menu-list" aria-labelledby="dropdownMenuButton">
-                            {isAuthenticated ? (
-                                <div className="container-user">
-                                    <img
-                                        src={user.picture}
-                                        alt="Profile"
-                                        className="profile-img"
-                                    /> {/* Imagen de perfil */}
-                                    <span className="name-user">
-                                        {user.name}
-                                    </span>
-                                </div>
-                            ) : (
-                                <button className="btn-person-circle" onClick={() => loginWithRedirect()}>
-                                    <i className="bi bi-person-circle"></i>
-                                </button>
-                            )}
+                        {isAuthenticated ? (
+                            <div className="container-user">
+                                <img
+                                    src={user.picture}
+                                    alt="Profile"
+                                    className="profile-img"
+                                /> {/* Imagen de perfil */}
+                                <span className="name-user">
+                                    {user.name}
+                                </span>
+                            </div>
+                        ) : (
+                            <button className="btn-person-circle" onClick={() => loginWithRedirect()}>
+                                <i className="bi bi-person-circle"></i>
+                            </button>
+                        )}
 
+                        <ul className="navbar-nav justify-content-end flex-grow-1 pe-3">
                             <li className="nav-item">
-                                <Link to="/profile" className={isActive('/profile')}>Perfil y Configuración</Link> {/* Enlace al perfil */}
+                                <Link to="/profile" className={isActive('/profile')}>Perfil y Configuración</Link>
                             </li>
                             <li className="nav-item">
-                                <Link to="/" className={isActive('/')}>Inicio</Link> {/* Enlace a Inicio */}
+                                <a className="nav-link" href="/">Link</a>
                             </li>
-                            <li className="nav-item">
-                                <Link to="/CompraProducto" className={isActive('/CompraProducto')}>Comprar Producto</Link> {/* Enlace a Comprar Producto */}
+                            <li className="nav-item dropdown">
+                                <a className="nav-link dropdown-toggle" href="/" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Crud Productos
+                                </a>
+                                {roles.includes('admin') && (
+                                    <ul className="dropdown-menu">
+                                        <li className="dropdown-item">
+                                            <Link to="/AgregarProducto" className={isActive('/AgregarProducto')}>Agregar Producto</Link>
+                                        </li>
+                                        <li className="dropdown-item">
+                                            <Link to="/EliminarProducto" className={isActive('/EliminarProducto')}>Eliminar Producto</Link>
+                                        </li>
+                                        <li className="dropdown-item">
+                                            <Link to="/ModificarProducto" className={isActive('/ModificarProducto')}>Modificar Producto</Link>
+                                        </li>
+                                        <li className="dropdown-item">
+                                            <Link to="/DetalleVenta" className={isActive('/DetalleVenta')}>Detalle de Venta</Link>
+                                        </li>
+                                    </ul>
+                                )}
                             </li>
-                            {roles.includes('admin') && ( /* Si el usuario tiene el rol de admin, muestra opciones adicionales */
-                                <>
-                                    <li className="nav-item dropdown">
-                                        <a className="nav-link dropdown-toggle" href="/" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                            Crud Productos
-                                        </a>
-                                        <ul className="dropdown-menu dropdown-menu-dark">
-
-                                            <li className="nav-item dropdown-item d-block">
-                                                <Link to="/AgregarProducto" className={isActive('/AgregarProducto')}>Agregar Producto</Link> {/* Enlace a Agregar Producto */}
-                                            </li>
-                                            <li className="nav-item dropdown-item">
-                                                <Link to="/EliminarProducto" className={isActive('/EliminarProducto')}>Eliminar Producto</Link> {/* Enlace a Eliminar Producto */}
-                                            </li>
-                                            <li className="nav-item dropdown-item">
-                                                <Link to="/ModificarProducto" className={isActive('/ModificarProducto')}>Modificar Producto</Link> {/* Enlace a Modificar Producto */}
-                                            </li>
-                                            <li className="nav-item dropdown-item">
-                                                <Link to="/DetalleVenta" className={isActive('/DetalleVenta')}>Detalle de Venta</Link> {/* Enlace a Detalle de Venta */}
-                                            </li>
-                                        </ul>
-                                    </li>
-
-
-                                </>
-                            )}
                             <li className="nav-item">
                                 <Link to="/about" className={isActive('/about')}>Sobre nosotros</Link> {/* Enlace a Sobre nosotros */}
                             </li>
@@ -193,7 +185,8 @@ function NavBar2() {
                     </div>
                 </div>
             </div>
-        </nav >
+        </nav>
+
     );
 }
 

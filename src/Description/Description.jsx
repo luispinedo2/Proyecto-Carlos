@@ -25,7 +25,7 @@ const Description = () => {
     };
 
     // Determina la ruta de retorno basada en el tipo de dato
-    const returnPath = item ? "/CompraProducto" : "/";
+    const returnPath = item ? "/" : "/";
 
     return (
         <section>
