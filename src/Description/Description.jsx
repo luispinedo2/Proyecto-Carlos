@@ -1,15 +1,23 @@
-// Description.jsx
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { agregarProducto } from '../CompraProducto/CompraProducto';
+import { agregarProducto } from '../Home/Home';
+import NavBar2 from '../Navbar/Navbar2'; // Ajusta esta importación según sea necesario
 
 const Description = () => {
     const location = useLocation();
     const item = location.state?.item;
     const producto = location.state?.producto;
 
-    const [carrito, setCarrito] = useState(JSON.parse(localStorage.getItem('carrito')) || []);
-    const [total, setTotal] = useState(JSON.parse(localStorage.getItem('total')) || 0);
+    const [carrito, setCarrito] = useState([]);
+    const [total, setTotal] = useState(0);
+
+    // Cargar carrito y total desde localStorage al montar el componente
+    useEffect(() => {
+        const carritoLocal = JSON.parse(localStorage.getItem('carrito')) || [];
+        const totalLocal = JSON.parse(localStorage.getItem('total')) || 0;
+        setCarrito(carritoLocal);
+        setTotal(totalLocal);
+    }, []);
 
     if (!item && !producto) {
         return <p>Producto no encontrado</p>;
@@ -20,8 +28,15 @@ const Description = () => {
     // Función para manejar la compra
     const comprar = () => {
         agregarProducto(details, carrito, setCarrito, total, setTotal);
-        localStorage.setItem('carrito', JSON.stringify(carrito));
-        localStorage.setItem('total', JSON.stringify(total));
+        // Debemos actualizar el carrito y el total antes de guardarlos en localStorage
+        const nuevoCarrito = carrito.find(item => item.id === details.id)
+            ? carrito.map(item => item.id === details.id ? { ...item, cantidad: item.cantidad + 1 } : item)
+            : [...carrito, { ...details, cantidad: 1 }];
+        const nuevoTotal = total + details.precio;
+        setCarrito(nuevoCarrito);
+        setTotal(nuevoTotal);
+        localStorage.setItem('carrito', JSON.stringify(nuevoCarrito));
+        localStorage.setItem('total', JSON.stringify(nuevoTotal));
     };
 
     // Determina la ruta de retorno basada en el tipo de dato
@@ -31,7 +46,7 @@ const Description = () => {
         <section>
             <Link to={returnPath} className="back-link">
                 <i className="bi bi-arrow-left-circle"></i>
-            </Link>
+            </Link><NavBar2 carrito={carrito} setCarrito={setCarrito} />
             <div className="description-container">
                 <img src={details.imagen} alt={details.nombre} className="description-image" />
                 <div className="description-details">
