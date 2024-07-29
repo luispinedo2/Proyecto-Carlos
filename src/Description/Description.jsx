@@ -43,10 +43,11 @@ const Description = () => {
     const returnPath = item ? "/" : "/";
 
     return (
-        <section>
+        <section className='section_description'>
             <Link to={returnPath} className="back-link">
                 <i className="bi bi-arrow-left-circle"></i>
-            </Link><NavBar2 carrito={carrito} setCarrito={setCarrito} />
+            </Link>
+            <NavBar2 carrito={carrito} setCarrito={setCarrito} />
             <div className="description-container">
                 <img src={details.imagen} alt={details.nombre} className="description-image" />
                 <div className="description-details">
@@ -55,7 +56,7 @@ const Description = () => {
                     <p>Precio: ${details.precio}</p>
                     <p>Stock: {details.stock}</p>
                     <p>Categoría: {details.categoria}</p>
-                    <button onClick={comprar} className="btn btn-primary">Agregar al carrito</button>
+                    <button onClick={comprar} className="btn btn-primary__agregar">Agregar al carrito</button>
                 </div>
             </div>
         </section>

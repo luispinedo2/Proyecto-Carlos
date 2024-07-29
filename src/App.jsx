@@ -2,6 +2,7 @@ import React from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import NavBar2 from './Navbar/Navbar2';
+import NavBar from './Navbar/NavBar';
 import Home from './Home/Home';
 import About from './About/About';
 import AgregarProducto from './AgregarProducto/AgregarProducto';
@@ -25,7 +26,9 @@ function App() {
     }
     return (
         <Router>
-            <NavBar2 />
+
+            {/* <NavBar />
+             <NavBar2 /> */}
 
 
             <Routes>

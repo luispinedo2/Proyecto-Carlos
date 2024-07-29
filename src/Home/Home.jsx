@@ -188,7 +188,7 @@ export function Home() {
         <div className="container__principal" >
             <nav className="navbar-dark content_principal">
                 <NavBar2 carrito={carrito} setCarrito={setCarrito} />
-                <div className="offcanvas offcanvas-end text-bg-dark" tabIndex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
+                <div className="offcanvas offcanvas-end" tabIndex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
                     <div className="offcanvas-header">
                         <button type="button" className="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                     </div>
@@ -199,7 +199,9 @@ export function Home() {
                                 {carrito.map(item => (
                                     <li key={item.id} className="list-group-item productosCarrito">
                                         <img src={item.imagen} alt={item.nombre} className="carrito-item-imagen" />
-                                        {item.nombre} <br />Cantidad: {item.cantidad} <br /> Precio : ${item.precio.toLocaleString()}
+                                        <div className="item-productos">
+                                            {item.nombre} <br />Cantidad: {item.cantidad} <br /> Precio : ${item.precio.toLocaleString()}
+                                        </div>
                                         <button className="btn btn-danger__comprar" onClick={() => eliminarProducto(item.id)}>
                                             {item.cantidad > 1 ? "Restar" : "Eliminar"}
                                         </button>
@@ -226,9 +228,7 @@ export function Home() {
                     )}
                 </div>
 
-                <div className={`scroll-up-btn ${showScroll ? 'show' : ''}`} onClick={scrollUp}>
-                    <i className="bi bi-arrow-up-short"></i>
-                </div>
+
             </nav >
             <Carousel />
             <div className="productos-card">
@@ -240,6 +240,9 @@ export function Home() {
                     {productos.length === 0 && <p className="mensaje_stock">No hay productos disponibles</p>}
 
                 </div>
+            </div>
+            <div className={`scroll-up-btn ${showScroll ? 'show' : ''}`} onClick={scrollUp}>
+                <i className="bi bi-arrow-up-short"></i>
             </div>
         </div >
 

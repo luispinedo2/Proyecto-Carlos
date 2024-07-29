@@ -55,15 +55,15 @@ export function EliminarProducto() {
 
 
     return (
-        <div className=" container-home container-home--listado">
-            <section className="productos">
-                <div className="container-list mt-4">
-                    <h1 className="titulo-productos">Productos Para Eliminar</h1>
-                    <div className="row content-listado ">
+        <div className="container-eliminar__producto">
+            <section className="productos-card">
+                <div className="container-list">
+                    <h1 className="titulo_card__principal">Productos Para Eliminar</h1>
+                    <div className="content-card">
                         {productos.length > 0 ? (
                             productos.map((producto) => (
-                                <div className="col-3 mb-4 listado-Producto" key={producto.id}>
-                                    <div className="card card-listado">
+                                <div className="col-3 content-card" key={producto.id}>
+                                    <div className="card">
                                         <img src={producto.imagen} alt={producto.nombre} className="card-img-top imagen" />
                                         <div className="card-body">
 
@@ -72,12 +72,12 @@ export function EliminarProducto() {
                                             <p className="card-text">{producto.descripcion}</p>
 
                                         </div>
-                                        <button className="btn btn-danger btn-danger-eliminar " onClick={() => eliminarProductoLista(producto.id)}>Eliminar</button>
+                                        <button className="btn-eliminar-producto" onClick={() => eliminarProductoLista(producto.id)}>Eliminar</button>
                                     </div>
                                 </div>
                             ))
                         ) : (
-                            <p>No hay productos en el localStorage</p>
+                            <p className="mensaje_stock">No hay productos en el localStorage</p>
                         )}
                     </div>
                 </div>

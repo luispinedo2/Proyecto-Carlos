@@ -42,7 +42,7 @@ export function CarritoItem({ item, onBuy, stock }) {
                     disabled={stock === 0}
                 />
                 <button
-                    className="btn btn-primary"
+                    className="btn btn-primary__agregar"
                     onClick={agregarAlCarrito}
                     disabled={stock === 0}
                 >

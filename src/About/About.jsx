@@ -1,6 +1,5 @@
-
+import Navbar2 from "../Navbar/Navbar2";
 import React, { useState, useEffect } from 'react';
-import '../assets/css/Main.css';
 export function About() {
     const [showScroll, setShowScroll] = useState(false);
     useEffect(() => {
@@ -20,11 +19,12 @@ export function About() {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     };
     return (
-        <div className="container-home">
-            <header className="header">
+        <div className="container-about">
+            <Navbar2 />
+            <header className="header-about">
                 <h1 className="titulo-header">Bienvenido a GameVerse</h1>
             </header>
-            <article className="article col-12">
+            <article className="article">
                 <h2 className="titulo-article">¿A QUE NOS DEDICAMOS?</h2>
                 <p className="text-article">
                     En GameVerse, nos dedicamos a ser tu principal fuente de entretenimiento interactivo,
@@ -39,7 +39,7 @@ export function About() {
                     En resumen, en GameVerse nos apasiona ofrecer todo lo que necesitas para llevar tu experiencia de juego al siguiente nivel.
                 </p>
             </article>
-            <article className="article col-12">
+            <article className="article">
                 <h2 className="titulo-article">Misión y Visión</h2>
                 <span className="subtitle-about">Nuestra Misión</span>
                 <p className="text-article">
@@ -55,12 +55,12 @@ export function About() {
                     permitiéndonos ofrecer una amplia variedad de productos de alta calidad.
                 </p>
             </article>
-            <section className="noticias">
-                <h2 className="titulo-noticias">Noticias</h2>
-                <span className="subtitulo-noticias">
+            <ar className="article">
+                <h2 className="titulo-article">Noticias</h2>
+                <span className="subtitle-about">
                     GameVerse Anuncia el Lanzamiento Exclusivo del Anticipado Juego "Galaxy Warriors"
                 </span>
-                <p className="text-noticias">
+                <p className="text-article">
                     20 de junio de 2024, Ciudad de Iquique - GameVerse, líder en la industria de los videojuegos,
                     se complace en anunciar el lanzamiento exclusivo de "Galaxy Warriors", uno de los títulos más esperados del año.
                     Desarrollado por el aclamado estudio de juegos Stellar Forge,
@@ -73,7 +73,7 @@ export function About() {
                     "Este juego es una muestra del compromiso de GameVerse de traer los títulos más emocionantes y de alta calidad a nuestra comunidad de jugadores.
                     Esperamos que nuestros clientes disfruten de esta experiencia única tanto como nosotros disfrutamos colaborando con Stellar Forge para hacerlo posible."
                 </p>
-            </section>
+            </ar>
 
             <div className={`scroll-up-btn ${showScroll ? 'show' : ''}`} onClick={scrollUp}>
                 <i className="bi bi-arrow-up-short"></i>

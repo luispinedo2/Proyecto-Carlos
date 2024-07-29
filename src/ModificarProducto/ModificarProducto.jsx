@@ -71,29 +71,30 @@ const ProductoForm = ({ productoEditable, setProductoEditable, guardarCambios })
 // setProductoEditable es la función que se encarga de establecer el producto editable
 // guardarCambios es la función que se encarga de guardar los cambios del producto
 const ProductoCard = ({ producto, modificarProducto, productoEditable, setProductoEditable, guardarCambios }) => (
-    <div className="col-3 mb-4 listado-Producto">
-        <div className="card card-listado">
+    <div className="col-3 content-card">
+        <div className="card">
             <img src={producto.imagen} alt={producto.nombre} className="card-img-top imagen" />
             <div className="card-body">
 
-                <h5 className="card-title">{producto.nombre}</h5>
-                <p className="card-text">${producto.precio.toLocaleString()}</p>
-                <p className="card-text">{producto.descripcion}</p>
-                <p className="card-text">Cantidad: {producto.stock}</p>
-                {/* productoEditable && productoEditable.id === producto.id esto compara el 
-                id del producto con el id del producto seleccionado si es igual lo selecciona */}
-                {productoEditable && productoEditable.id === producto.id && (
+                {/*si el producto esta siendo modificado se muestra el formulario de modificación y si no es esta siendo editado aparece */}
+                {productoEditable && productoEditable.id === producto.id ? (
                     <ProductoForm
                         productoEditable={productoEditable}
                         setProductoEditable={setProductoEditable}
                         guardarCambios={guardarCambios}
-
                     />
+                ) : (
+                    <>
+                        <h5 className="card-title">{producto.nombre}</h5>
+                        <p className="card-text">Precio: ${producto.precio}</p>
+                        <p className="card-text">Descripción: {producto.descripcion}</p>
+                        <p className="card-text">Cantidad: {producto.stock}</p>
+                    </>
                 )}
             </div>
             {/*si el producto esta siendo modificado se oculta el boton de modificar y si no es esta siendo editado aparece */}
             {!productoEditable && (
-                <button className="btn btn-primary" onClick={() => modificarProducto(producto.id)}>Modificar</button>
+                <button className="btn-modificar" onClick={() => modificarProducto(producto.id)}>Modificar</button>
             )}
 
         </div>
@@ -152,12 +153,11 @@ const ModificarProducto = () => {
 
 
     return (
-        <div className="container-home container-home--listado">
-
-            <section className="productos">
-                <div className="container-list mt-4">
-                    <h1 className="titulo-productos">Listado de Productos Disponibles para Modificar</h1>
-                    <div className="row content-listado">
+        <div className="container-eliminar__producto">
+            <section className="productos-card">
+                <div className="container-list">
+                    <h1 className="titulo_card__principal">Listado de Productos Disponibles para Modificar</h1>
+                    <div className="content-card">
                         {productos.length > 0 ? (  // Verificar si hay productos en la lista
                             productos.map(producto => (
                                 <ProductoCard
@@ -170,7 +170,7 @@ const ModificarProducto = () => {
                                 />
                             ))
                         ) : (
-                            <p>No hay productos en el localStorage</p>  // Mensaje si no hay productos
+                            <p className="mensaje_stock">No hay productos en el localStorage</p>  // Mensaje si no hay productos
                         )}
                     </div>
                 </div>

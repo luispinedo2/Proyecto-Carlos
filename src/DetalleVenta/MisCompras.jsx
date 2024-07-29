@@ -1,4 +1,4 @@
-
+import Navbar2 from "../Navbar/Navbar2";
 import React, { useEffect, useState } from "react";
 
 export function MisCompras() {
@@ -72,41 +72,53 @@ export function MisCompras() {
 
     return (
         <div className="content-ventas">
-            <div>
-                <header className="card-title titulo">Listado de Compras</header>
+            <Navbar2 />
+            {/*<NavBar2 carrito={carrito} setCarrito={setCarrito} />*/}
+            <div className="cabecera_detalle">
+                <h1 className="titulo-ventas">Compras Realizadas</h1>
+                <h2 className="titulo-detalle">Detalle de la compra</h2>
             </div>
-            <div className="row">
-                <div className="col-8 mt-4 ventas">
-                    <h1 className="subtitulo-ventas">Compras Realizadas</h1>
-                    <ul className="list-group">
+            <div className="container-detalle">
+                <div className="codigo-ventas">
+                    <ul className="codigo-menu">
                         {ventas.map(venta => (
-                            <li key={venta.id} className="list-group-item ventasItem">
-                                {venta.id} <br />
-                                Fecha de la compra: {venta.fecha.toLocaleString()}
-                                <button className="btn btn-info" onClick={() => seleccionarVenta(venta)}>Ver Detalles de la Compra</button>
+                            <li key={venta.id} className="ventasItem">
+                                código de venta: {venta.id} <br />
+                                Fecha de la venta: {venta.fecha.toLocaleString()}
+                                <button className="btn btn-ver_detalle" onClick={() => seleccionarVenta(venta)}>Ver Detalle</button>
                             </li>
                         ))}
-                        {ventas.length === 0 && <p className="registro-ventas">No hay Compras registradas</p>}
+                        {ventas.length === 0 && <p className="registro-ventas">No hay ventas registradas</p>}
                     </ul>
                 </div>
-                <div className="col-4 detalle-venta">
+
+                <div className="detalle-venta">
                     {/*las && se utilizan para mostrar el contenido si la condición es verdadera*/}
                     {ventaSeleccionada && (
                         <>
-                            <h2 className="subtitulo-detalle">Detalle de la Compra</h2>
-                            <ul className="list-group">
+
+                            <div className="menu-detalle">
                                 {ventaSeleccionada.productos.map((producto, index) => (
-                                    <li key={index} className="list-group-item detalleItem">
-                                        {producto.nombre} - ${producto.precio.toLocaleString()} x {producto.cantidad}
-                                    </li>
+
+                                    <div key={index} className="detalleItem">
+                                        <img src={producto.imagen} alt={producto.nombre} className="carrito-item-imagen" />
+                                        <strong className="nombre_producto-detalle">{producto.nombre}</strong>
+                                        <span className="precio_producto-detalle">Precio: ${producto.precio.toLocaleString()}</span>
+                                        <span className="cantidad_producto-detalle">Cantidad: {producto.cantidad}</span>
+
+                                    </div>
                                 ))}
-                            </ul>
-                            <h3 className="Total-detalle">Total: ${ventaSeleccionada.total.toLocaleString()}</h3>
-                            <h4 className="Fecha-detalle">Fecha: {ventaSeleccionada.fecha.toLocaleString()}</h4>
-                            <button className="btn btn-danger  btn-danger-detalle" onClick={() => anularVenta(ventaSeleccionada.id)}>Borrar del historial</button>
+                                <div className="datos__venta">
+                                    <h3 className="Total-detalle">Total: ${ventaSeleccionada.total.toLocaleString()}</h3>
+                                    <h4 className="Fecha-detalle">Fecha: {ventaSeleccionada.fecha.toLocaleString()}</h4>
+                                </div>
+                                <button className="btn btn-danger-detalle" onClick={() => anularVenta(ventaSeleccionada.id)}>Anular Venta</button>
+
+                            </div>
 
                         </>
                     )}
+                    {/*mostrar mensaje de anulación**/}
                     {mensaje && <h3 className="mensajeAnular">{mensaje}</h3>}
                 </div>
             </div>
