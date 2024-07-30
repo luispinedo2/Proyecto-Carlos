@@ -1,3 +1,5 @@
+
+/*
 import React, { useEffect, useState } from "react";
 import { useAuth0 } from '@auth0/auth0-react';
 import { v4 as uuidv4 } from 'uuid';
@@ -203,3 +205,4 @@ export function CompraProducto() {
 }
 
 export default CompraProducto;
+*/

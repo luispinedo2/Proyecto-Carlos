@@ -1,4 +1,5 @@
-import { Home } from "../Home/Home"
+
+/*import { Home } from "../Home/Home"
 
 export function PaginaPrincipal() {
     return <>
@@ -12,7 +13,6 @@ export function PaginaPrincipal() {
 
 export default PaginaPrincipal;
 
-/*
 export function PageContent() {
     return (
         <div>

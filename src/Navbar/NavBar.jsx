@@ -1,21 +1,32 @@
-import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import { useAuth0 } from '@auth0/auth0-react';
-import { Profile } from '../Profile/Profile'; // Ajusta esta importación según sea necesario
+import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
+export function NavBar({ carrito = [], setCarrito }) {
+    const [contador, setContador] = useState(0);
+    const location = useLocation();
 
-function NavBar() {
+    useEffect(() => {
+        if (carrito && carrito.length > 0) {
+            const totalProductos = carrito.reduce((acc, item) => acc + item.cantidad, 0);
+            setContador(totalProductos);
+        } else {
+            setContador(0);
+        }
+    }, [carrito]);
+
     return (
-        <nav>
-
-            {/*ingresar la ubicacion del cliente*/}
-            <div>
-            </div>
-
-        </nav >
+        <div className="navbar-carrito">
+            <div></div>
+            <button className="carrito_compras-btn" type="button" data-bs-toggle="offcanvas"
+                data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar"
+                aria-label="Toggle navigation"
+                /*si estamos en la ruta de description, colarle disabled*/
+                disabled={location.pathname === '/description' ? true : false}
+            >
+                <i className="bi bi-cart"></i>
+                {contador > 0 && <span className="contador-carrito">{contador}</span>}
+            </button>
+        </div>
     );
 }
 
 export default NavBar;
-
-
-

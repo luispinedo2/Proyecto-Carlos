@@ -68,22 +68,7 @@ export function AgregarNuevoProducto() {
     };
 
     return (
-        <div>
-            <h2 className='titulo-agregar'>Agregar Nuevo Producto</h2>
-            <div className="content-input mb-3">
-                <form action="#">
-                    <input type="text" className="form-control" ref={nombreProducto} placeholder="Ingrese el nombre del producto" />
-                    <input type="number" className="form-control" ref={precioProducto} min={1} placeholder="Ingrese el precio" />
-                    <input type="text" className="form-control" ref={descripcionProducto} placeholder="Ingrese la descripción" />
-                    <input type="text" className="form-control" ref={categoriaProducto} placeholder="Ingrese la categoría" />
-                    <input type="number" className="form-control" ref={stockProducto} min={1} placeholder="Ingrese la cantidad" />
-                    <input type="file" className="form-control" ref={imagenProducto} onChange={guardarImagen} />
-                    <button type="button" className="btn-agregar btn-success" onClick={agregarProductoNuevo}>
-                        <i className="bi bi-plus-circle-fill mas__agregar"></i>
-                        Agregar Producto
-                    </button>
-                </form>
-            </div>
+        <div className='container_agregar_producto'>
             <div className="productos-agregados">
                 <h3 className='titulo-agregados'>Productos Agregados</h3>
                 <ul>
@@ -93,6 +78,20 @@ export function AgregarNuevoProducto() {
                         </li>
                     ))}
                 </ul>
+            </div>
+
+            <div className="content-input">
+                <form action="#">
+                    <input type="text" className="input_agregar_producto" ref={nombreProducto} placeholder="Ingrese el nombre del producto" />
+                    <input type="number" className="input_agregar_producto" ref={precioProducto} min={1} placeholder="Ingrese el precio" />
+                    <input type="text" className="input_agregar_producto" ref={descripcionProducto} placeholder="Ingrese la descripción" />
+                    <input type="text" className="input_agregar_producto" ref={categoriaProducto} placeholder="Ingrese la categoría" />
+                    <input type="number" className="input_agregar_producto" ref={stockProducto} min={1} placeholder="Ingrese la cantidad" />
+                    <input type="file" className="input_agregar_producto form-control" ref={imagenProducto} onChange={guardarImagen} />
+                    <button type="button" className="btn-agregar" onClick={agregarProductoNuevo}>
+                        Agregar Producto
+                    </button>
+                </form>
             </div>
 
             <div className="scroll-up-btn">
