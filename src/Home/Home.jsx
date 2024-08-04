@@ -26,37 +26,8 @@ export function agregarProducto(producto, carrito, setCarrito, total, setTotal) 
 
 
 export function Home() {
-    /*guardar los productos en el local storage*/
-    const productosinicial = [
-        { id: uuidv4(), imagen: 'img/OIP.jpeg', nombre: 'MARIO BROSS', precio: 20000, descripcion: "Clásico juego de plataformas y aventuras.", stock: 120, categoria: 'Plataformas' },
-        { id: uuidv4(), imagen: 'img/fortnite.jpg', nombre: 'FORTNITE', precio: 10000, descripcion: "Popular juego de disparos y construcción.", stock: 120, categoria: 'Battle Royale' },
-        { id: uuidv4(), imagen: 'img/zelda.jpeg', nombre: 'ZELDA', precio: 10000, descripcion: "Épico juego de aventuras y exploración.", stock: 120, categoria: 'Aventura' },
-        { id: uuidv4(), imagen: 'img/freefire.jpeg', nombre: 'FREE FIRE', precio: 5000, descripcion: "Juego de disparos y supervivencia.", stock: 120, categoria: 'Battle Royale' },
-        { id: uuidv4(), imagen: 'img/pacman.jpeg', nombre: 'PACMAN', precio: 80000, descripcion: "Clásico juego arcade de laberintos.", stock: 120, categoria: 'Arcade' },
-        { id: uuidv4(), imagen: 'img/metalslug.jpeg', nombre: 'METAL SLUG', precio: 90000, descripcion: "Intenso juego de disparos en 2D.", stock: 120, categoria: 'Acción' },
-        { id: uuidv4(), imagen: 'img/duck.jpeg', nombre: 'DUCK HUNT', precio: 11000, descripcion: "Juego de caza con pistola de luz.", stock: 120, categoria: 'Tiro' },
-        { id: uuidv4(), imagen: 'img/donkeykong.jpeg', nombre: 'DONKEY KONG', precio: 6000, descripcion: "Clásico juego de plataformas y aventuras.", stock: 120, categoria: 'Plataformas' },
-        { id: uuidv4(), imagen: 'img/contra.jpeg', nombre: 'CONTRA', precio: 30000, descripcion: "Acción y disparos en un clásico 2D.", stock: 120, categoria: 'Acción' },
-        { id: uuidv4(), imagen: 'img/crash.png', nombre: 'CRASH', precio: 40000, descripcion: "Juego de plataformas con un divertido personaje.", stock: 120, categoria: 'Plataformas' },
-        { id: uuidv4(), imagen: 'img/call.jpeg', nombre: 'CALL OF DUTY', precio: 70000, descripcion: "Famoso juego de disparos en primera persona.", stock: 120, categoria: 'FPS' },
-        { id: uuidv4(), imagen: 'img/halo.jpeg', nombre: 'HALO', precio: 80000, descripcion: "Juego de disparos futurista y épico.", stock: 120, categoria: 'FPS' },
-        { id: uuidv4(), imagen: 'img/GEARS.jpeg', nombre: 'GEARS OF WAR', precio: 90000, descripcion: "Intenso juego de disparos en tercera persona.", stock: 120, categoria: 'TPS' },
-        { id: uuidv4(), imagen: 'img/ASSASSINS.jpeg', nombre: 'ASSASSINS CREED', precio: 10000, descripcion: "Juego de acción y sigilo histórico.", stock: 120, categoria: 'Acción' },
-        { id: uuidv4(), imagen: 'img/GOD.jpeg', nombre: 'GOD OF WAR', precio: 20000, descripcion: "Épico juego de acción y mitología.", stock: 120, categoria: 'Acción' },
-        { id: uuidv4(), imagen: 'img/SPIDERMAN.jpeg', nombre: 'SPIDERMAN', precio: 30000, descripcion: "Aventura de superhéroes en Nueva York.", stock: 120, categoria: 'Acción' },
-        { id: uuidv4(), imagen: 'img/THE-LAST.jpeg', nombre: 'THE LAST OF US', precio: 40000, descripcion: "Juego de supervivencia y narrativa emocional.", stock: 120, categoria: 'Supervivencia' },
-        { id: uuidv4(), imagen: 'img/UNCHARTED.jpeg', nombre: 'UNCHARTED', precio: 50000, descripcion: "Aventuras y tesoros en acción trepidante.", stock: 120, categoria: 'Aventura' },
-        { id: uuidv4(), imagen: 'img/RESIDENT.jpeg', nombre: 'RESIDENT EVIL', precio: 60000, descripcion: "Juego de terror y supervivencia.", stock: 120, categoria: 'Terror' },
-        { id: uuidv4(), imagen: 'img/FIFA23.jpeg', nombre: 'FIFA', precio: 70000, descripcion: "Popular juego de fútbol y deportes.", stock: 120, categoria: 'Deportes' },
-        { id: uuidv4(), imagen: 'img/PES21.jpeg', nombre: 'PES', precio: 80000, descripcion: "Simulación de fútbol realista.", stock: 120, categoria: 'Deportes' },
-        { id: uuidv4(), imagen: 'img/NBA.jpeg', nombre: 'NBA', precio: 90000, descripcion: "Juego de baloncesto profesional.", stock: 120, categoria: 'Deportes' },
-        { id: uuidv4(), imagen: 'img/MLB.jpeg', nombre: 'MLB', precio: 10000, descripcion: "Simulación de béisbol profesional.", stock: 120, categoria: 'Deportes' },
-        { id: uuidv4(), imagen: 'img/NFL.jpeg', nombre: 'NFL', precio: 20000, descripcion: "Juego de fútbol americano.", stock: 120, categoria: 'Deportes' },
-        { id: uuidv4(), imagen: 'img/UFC.jpeg', nombre: 'UFC', precio: 30000, descripcion: "Simulación de artes marciales mixtas.", stock: 120, categoria: 'Deportes' },
-        { id: uuidv4(), imagen: 'img/MORTAL.jpeg', nombre: 'MORTAL KOMBAT', precio: 40000, descripcion: "Clásico juego de lucha y combate.", stock: 120, categoria: 'Lucha' },
-        { id: uuidv4(), imagen: 'img/STREET.jpeg', nombre: 'STREET FIGHTER', precio: 50000, descripcion: "Icónico juego de lucha callejera.", stock: 120, categoria: 'Lucha' },
-    ];
-    const [productos, setProductos] = useState(productosinicial);
+   
+    const [productos, setProductos] = useState(JSON.parse(localStorage.getItem('productos')) || []);
     const { isAuthenticated, loginWithRedirect } = useAuth0();
     const [carrito, setCarrito] = useState(JSON.parse(localStorage.getItem('carrito')) || []);
     const [total, setTotal] = useState(JSON.parse(localStorage.getItem('total')) || 0);
@@ -64,26 +35,13 @@ export function Home() {
     const [compras, setCompras] = useState(JSON.parse(localStorage.getItem('compras')) || []);
     const [mostrarConfirmacion, setMostrarConfirmacion] = useState(false);
     const [showScroll, setShowScroll] = useState(false);
-    const [filteredProducts, setFilteredProducts] = useState(productosinicial);
+    const [filteredProducts, setFilteredProducts] = useState([]);
     const location = useLocation();
     const navigate = useNavigate();
 
     const params = new URLSearchParams(location.search);
     const category = params.get('category');
 
-    // Recuperar productos de localStorage al montar el componente
-    useEffect(() => {
-        const productosGuardados = JSON.parse(localStorage.getItem('productos'));
-        if (productosGuardados) {
-            setProductos(productosGuardados);
-        }
-    }
-        , []);
-
-    // Guardar productos en localStorage al actualizar el estado
-    useEffect(() => {
-        localStorage.setItem('productos', JSON.stringify(productos));
-    }, [productos]);
 
     useEffect(() => {
         localStorage.setItem("carrito", JSON.stringify(carrito));

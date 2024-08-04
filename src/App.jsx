@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import NavBar2 from './Navbar/Navbar2';
@@ -16,8 +16,31 @@ import MisCompras from './DetalleVenta/MisCompras';
 import Profile from './Profile/Profile';
 import Description from './Description/Description';
 import BuscarProducto from './Navbar/BuscarProducto';
+import ProductosList from './db.json';
+import { v4 as uuidv4 } from 'uuid';
+
 function App() {
     const { isLoading } = useAuth0();
+    const [productos, setProductos] = React.useState(ProductosList);
+    React.useEffect(() => {
+        setProductos(productos.map(producto => {
+            return { ...producto, id: uuidv4() }
+        }))
+    }, []);
+
+    useEffect(() => {
+        localStorage.setItem("productos", JSON.stringify(productos));
+    }, [productos]);
+
+    useEffect(() => {
+        const productos = JSON.parse(localStorage.getItem("productos"));
+        if (productos) {
+            setProductos(productos);
+        }
+    }
+        , []);
+        
+
 
     if (isLoading) {
         return <div className='logo_loader'>
@@ -32,7 +55,10 @@ function App() {
 
 
             <Routes>
-                <Route path="/" element={<Home />} />
+                <Route path="/" element={<Home
+                    productos={productos}
+                    setProductos={setProductos}
+                />} />
                 <Route path="/about" element={<About />} />
                 <Route path="/profile" element={<Profile />} />
                 <Route path="/AgregarProducto" element={<AgregarProducto />} />
